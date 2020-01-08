@@ -1,0 +1,6 @@
+framework module Pods_BirdViewChallengeTests {
+  umbrella header "Pods-BirdViewChallengeTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
