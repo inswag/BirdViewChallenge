@@ -30,6 +30,20 @@ class ProductsViewController: ViewController {
         return cv
     }()
     
+    lazy var searchBar: UISearchBar = {
+        let sb = UISearchBar()
+        sb.placeholder = "검색"
+        sb.barTintColor = UIColor.white
+
+        
+        
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.white
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = Tools.font.appleSDGothicNeoRegular(size: 17)
+        sb.delegate = self
+        return sb
+    }()
+    
+    
     
     // MARK:- Initialize
     
@@ -53,11 +67,62 @@ class ProductsViewController: ViewController {
     }
     
     override func setupUIComponents() {
-//        collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        
+        // UICollectionView
+        
+        [self.collectionView].forEach { self.view.addSubview($0) }
+        collectionView.snp.makeConstraints { $0.edges.equalToSuperview() }
+        
+        
+        // UISearchBar
+        
+        navigationController?.navigationBar.addSubview(searchBar)
+        
+        
+        // - Access To UISearchBar Glass Icon
+        
+        let textField = self.searchBar.value(forKey: "searchField") as! UITextField
+        let glassIconView = textField.leftView as! UIImageView
+        glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
+        glassIconView.tintColor = UIColor.colorWithHexString(hexString: Tools.color.gray, alpha: 0.4)
+        
+        // - Accesss To UISearchBar Placeholder
+        
+        textField.textColor = UIColor.colorWithHexString(hexString: Tools.color.gray, alpha: 0.4)
+
+        let textFieldInsideSearchBarLabel = textField.value(forKey: "placeholderLabel") as! UILabel
+        textFieldInsideSearchBarLabel.textColor = UIColor.colorWithHexString(hexString: Tools.color.gray, alpha: 0.4)
+        self.searchBar.snp.makeConstraints { (m) in
+            m.top.equalToSuperview()
+            m.leading.equalToSuperview().offset(12)
+            m.trailing.equalToSuperview().offset(-12)
+            m.bottom.equalToSuperview().offset(-12)
+        }
     }
 
 
 }
+
+// MARK:- Search Bar Delegate
+
+extension ProductsViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+//        if searchText.isEmpty {
+//            filteredUsers = users
+//        } else {
+//            filteredUsers = self.users.filter { (user) -> Bool in
+//                return user.username.lowercased().contains(searchText.lowercased())
+//            }
+//        }
+//
+//        self.collectionView?.reloadData()
+        
+    }
+}
+
+// MARK:- Collection View Data Source
 
 extension ProductsViewController: UICollectionViewDataSource {
     
@@ -70,10 +135,14 @@ extension ProductsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductsCell.self), for: indexPath) as! ProductsCell
+        
+        return cell
     }
     
 }
+
+// MARK:- Collection View Delegate
 
 extension ProductsViewController: UICollectionViewDelegateFlowLayout {
     

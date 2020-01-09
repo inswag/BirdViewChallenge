@@ -10,9 +10,21 @@ import UIKit
 
 struct Color {
     
+    // Ref. Navigation Bar Background Color
     var violet: String {
         return "#9013FE"
     }
+    
+    // Ref. Search Bar Tint Color
+    var gray: String {
+        return "#141428"
+    }
+    
+    // Ref. UIColor.black
+    var black: String {
+        return "#000000"
+    }
+    
     
 }
 
@@ -42,5 +54,3 @@ extension UIColor {
     }
 
 }
-
-

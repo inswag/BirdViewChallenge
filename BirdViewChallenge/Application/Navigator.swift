@@ -18,7 +18,6 @@ class Navigator {
 //        case product            // Product
     }
     
-    // 왜 SwiftHub 에서는 옵셔널로 처리했을까?
     func get(segue: Scene) -> UIViewController {
         
         switch segue {
