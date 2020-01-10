@@ -8,26 +8,30 @@
 
 import UIKit
 
-class ProductsHeader: UICollectionViewCell {
-    
-    let imageView: UIImageView = {
-        let imgView = UIImageView()
-        imgView.image = UIImage(named: "baseline_navigation_black")
-        return imgView
-    }()
+class ProductsHeader: UICollectionReusableView {
     
     let typeName: UILabel = {
         let label = UILabel()
-        label.text = "타입"
-        label.font = Tools.font.appleSDGothicNeoBold(size: 14)
+        label.textAlignment = .right
+        label.text = "모든 피부 타입"
         label.textColor = UIColor.colorWithHexString(hexString: Tools.color.black)
+        label.font = Tools.font.appleSDGothicNeoBold(size: 14)
         return label
+    }()
+    
+    let typeButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("타입", for: .normal)
+        btn.titleLabel?.font = Tools.font.appleSDGothicNeoBold(size: 14)
+        btn.titleLabel?.textColor = UIColor.colorWithHexString(hexString: Tools.color.black)
+        // Todo: - Text -> Image
+        return btn
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .white
-        self.setupUIComponents()
+//        backgroundColor = .white
+//        self.setupUIComponents()
 //        self.imageView.rotate()
     }
     
@@ -36,12 +40,22 @@ class ProductsHeader: UICollectionViewCell {
     }
     
     func setupUIComponents() {
-        self.addSubview(imageView)
-        imageView.snp.makeConstraints { (m) in
-            m.width.equalTo(20)
-            m.height.equalTo(20)
-            m.centerX.equalToSuperview()
+        backgroundColor = .blue
+        
+        [typeName, typeButton].forEach { addSubview($0) }
+        
+        typeButton.snp.makeConstraints { (m) in
             m.centerY.equalToSuperview()
+            m.trailing.equalToSuperview().offset(-12)
+            m.width.equalTo(24)
+            m.height.equalTo(24)
         }
+        
+        typeName.snp.makeConstraints { (m) in
+            m.centerY.equalTo(typeButton.snp.centerY)
+            m.trailing.equalTo(typeButton.snp.leading)
+        }
+        
+        
     }
 }

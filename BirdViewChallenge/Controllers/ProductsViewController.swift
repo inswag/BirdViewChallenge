@@ -27,6 +27,7 @@ class ProductsViewController: ViewController {
         cv.dataSource = self
         cv.delegate = self
         cv.register(ProductsCell.self, forCellWithReuseIdentifier: String(describing: ProductsCell.self))
+        cv.register(ProductsHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: ProductsHeader.self))
         return cv
     }()
     
@@ -34,16 +35,11 @@ class ProductsViewController: ViewController {
         let sb = UISearchBar()
         sb.placeholder = "검색"
         sb.barTintColor = UIColor.white
-
-        
-        
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.white
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).font = Tools.font.appleSDGothicNeoRegular(size: 17)
         sb.delegate = self
         return sb
     }()
-    
-    
     
     // MARK:- Initialize
     
@@ -62,7 +58,6 @@ class ProductsViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
     }
     
@@ -100,6 +95,18 @@ class ProductsViewController: ViewController {
         }
     }
 
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsHeader.self), for: indexPath) as! ProductsHeader
+            
+            
+            return header
+        default:
+            return UICollectionReusableView()
+        }
+    }
 
 }
 
@@ -127,7 +134,7 @@ extension ProductsViewController: UISearchBarDelegate {
 extension ProductsViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return viewModel.numberOfSections()
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -140,10 +147,19 @@ extension ProductsViewController: UICollectionViewDataSource {
         return cell
     }
     
+    // Handle Collection View Header & Footer
+    
+    
+    
+    
 }
 
 // MARK:- Collection View Delegate
 
 extension ProductsViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: self.view.frame.width, height: 50)
+    }
     
 }

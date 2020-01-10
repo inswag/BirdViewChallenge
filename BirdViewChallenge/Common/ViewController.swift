@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
 
     // MARK:- Initialize
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -22,6 +23,7 @@ class ViewController: UIViewController {
     }
     
     // MARK:- View Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUICommonComponents()
