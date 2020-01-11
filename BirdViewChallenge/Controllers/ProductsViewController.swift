@@ -154,7 +154,7 @@ extension ProductsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductsCell.self), for: indexPath) as! ProductsCell
-        cell.backgroundColor = .yellow
+        cell.backgroundColor = .white
         return cell
     }
     

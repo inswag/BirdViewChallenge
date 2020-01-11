@@ -20,9 +20,19 @@ struct Color {
         return "#141428"
     }
     
+    // Ref. Product Price
+    var darkGray: String {
+        return "#ABABC4"
+    }
+    
     // Ref. UIColor.black
     var black: String {
         return "#000000"
+    }
+    
+    // Ref. Product Image Layer Color
+    var lightGray: CGColor {
+        return UIColor.rgb(r: 24, g: 24, b: 80, a: 0.04).cgColor
     }
     
     
