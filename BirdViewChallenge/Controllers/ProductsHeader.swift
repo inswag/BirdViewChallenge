@@ -2,13 +2,15 @@
 //  ProductsHeader.swift
 //  BirdViewChallenge
 //
-//  Created by 박인수 on 09/01/2020.
+//  Created by 박인수 on 11/01/2020.
 //  Copyright © 2020 inswag. All rights reserved.
 //
 
 import UIKit
 
 class ProductsHeader: UICollectionReusableView {
+    
+    // MARK:- UI Properties
     
     let typeName: UILabel = {
         let label = UILabel()
@@ -24,25 +26,30 @@ class ProductsHeader: UICollectionReusableView {
         btn.setTitle("타입", for: .normal)
         btn.titleLabel?.font = Tools.font.appleSDGothicNeoBold(size: 14)
         btn.titleLabel?.textColor = UIColor.colorWithHexString(hexString: Tools.color.black)
-        // Todo: - Text -> Image
+        // Tod: - Text -> Image
         return btn
     }()
     
+    // MARK:- Initialize
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        backgroundColor = .white
-//        self.setupUIComponents()
-//        self.imageView.rotate()
+        //        backgroundColor = .white
+        //        self.setupUIComponents()
+        //        self.imageView.rotate()
+        //        setupUIComponents()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK:- Methods
+    
     func setupUIComponents() {
         backgroundColor = .blue
         
-        [typeName, typeButton].forEach { addSubview($0) }
+        [typeName, typeButton].forEach { self.addSubview($0) }
         
         typeButton.snp.makeConstraints { (m) in
             m.centerY.equalToSuperview()
