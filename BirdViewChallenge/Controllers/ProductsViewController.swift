@@ -16,6 +16,11 @@ class ProductsViewController: ViewController {
     let navigate: Navigator
     let viewModel: ProductsViewModel
 
+    // Network Property
+    let productsService: ProductsServiceType = ProductsService()
+    var fetchedProducts: [ProductsAllType] = []
+    var page: Int = 2
+    
     // MARK: - UI Properties
     
     lazy var collectionView: UICollectionView = {
@@ -63,6 +68,7 @@ class ProductsViewController: ViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.fetchProductsAllType()
     }
     
     override func setupUIComponents() {
@@ -100,7 +106,33 @@ class ProductsViewController: ViewController {
         
     }
     
+    // MARK:- Network Method
     
+    fileprivate func fetchProductsAllType() {
+        viewModel.fetchAllTypeProducts { self.collectionView.reloadData() }
+//        productsService.fetchProductsAllType { (result) in
+//            switch result {
+//            case .success(let value):
+//                value.body.forEach {
+//                    self.fetchedProducts.append($0)
+//                }
+//                print(self.fetchedProducts)
+//                self.collectionView.reloadData()
+//            case .failure(let error):
+//                print(error)
+//                //                self.since = 0
+//
+//            }
+//        }
+//        print("This is yours : \(self.fetchedProducts)")
+    }
+    
+    fileprivate func paginateProducts() {
+//        print("will Paginate User List!")
+//        print("pageNumber: ", page)
+//        fetchProducts(since: page)
+//        page += 1
+    }
     
     
 }
@@ -155,6 +187,7 @@ extension ProductsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductsCell.self), for: indexPath) as! ProductsCell
         cell.backgroundColor = .white
+        
         return cell
     }
     

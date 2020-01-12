@@ -8,22 +8,45 @@
 
 import UIKit
 
-class ProductsViewModel {
+final class ProductsViewModel {
+    
+    // MARK:- Properties
+    
+    let productsService: ProductsService = ProductsService()
+    var fetchedProducts: [ProductsAllType] = []
+    var page: Int = 1
     
     // MARK:- Initialize
     
     init() {
-        
     }
-    
 
     // MARK:- Data Source
     
     func numberOfSections() -> Int {
-      return 1
+        return 1
     }
 
     func numberOfItemsInSection() -> Int {
-      return 10
+      return self.fetchedProducts.count
     }
+    
+    // MARK:- Methods
+    
+    func fetchAllTypeProducts(completion: @escaping () -> Void) {
+        productsService.fetchProductsAllType { (result) in
+            switch result {
+            case .success(let value):
+                value.body.forEach {
+                    self.fetchedProducts.append($0)
+                }
+                print(self.fetchedProducts.count)
+                completion()
+            case .failure(let error):
+                print(error)
+                //                self.since = 0
+            }
+        }
+    }
+    
 }

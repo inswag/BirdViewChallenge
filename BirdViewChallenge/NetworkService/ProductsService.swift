@@ -10,16 +10,16 @@ import Foundation
 import Alamofire
 
 protocol ProductsServiceType {
-    func fetchProductsAllType(completion: @escaping (Result<ProductsRoot>) -> ())
-    func fetchProductsByType(type: String, page: Int, completion: @escaping (Result<ProductsRoot>) -> ())
-    func fetchProductsBySearchingInType(type: String, keyword: String, completion: @escaping (Result<ProductsRoot>) -> ())
+    func fetchProductsAllType(completion: @escaping (Result<ProductsAllTypeRoot>) -> ())
+    func fetchProductsByType(type: String, page: Int, completion: @escaping (Result<ProductsAllTypeRoot>) -> ())
+    func fetchProductsBySearchingInType(type: String, keyword: String, completion: @escaping (Result<ProductsAllTypeRoot>) -> ())
 }
 
 struct ProductsService: ProductsServiceType {
     
     
     // 모든 피부 타입 (Pagination X)
-    func fetchProductsAllType(completion: @escaping (Result<ProductsRoot>) -> ()) {
+    func fetchProductsAllType(completion: @escaping (Result<ProductsAllTypeRoot>) -> ()) {
         let api = "\(API.baseURL)" + "\(API.getProducts)"
         Alamofire
             .request(api, method: .get)
@@ -28,7 +28,7 @@ struct ProductsService: ProductsServiceType {
                 switch response.result {
                 case .success(let value):
                     do {
-                        let decodableValue = try JSONDecoder().decode(ProductsRoot.self, from: value)
+                        let decodableValue = try JSONDecoder().decode(ProductsAllTypeRoot.self, from: value)
                         completion(Result.success(decodableValue))
                     } catch {
                         completion(.failure(nil, error))
@@ -41,7 +41,7 @@ struct ProductsService: ProductsServiceType {
     }
     
     // 피부 타입 유형에 따른 상품 (Pagination O)
-    func fetchProductsByType(type: String, page: Int = 1, completion: @escaping (Result<ProductsRoot>) -> ()) {
+    func fetchProductsByType(type: String, page: Int = 1, completion: @escaping (Result<ProductsAllTypeRoot>) -> ()) {
         
         let api = "\(API.baseURL)" + "\(API.getProducts)" + "\(API.skinTypeURL)" + "\(type)" + "\(API.pageURL)" + "\(page)"
         Alamofire
@@ -51,7 +51,7 @@ struct ProductsService: ProductsServiceType {
                 switch response.result {
                 case .success(let value) :
                     do {
-                        let decodableValue = try JSONDecoder().decode(ProductsRoot.self, from: value)
+                        let decodableValue = try JSONDecoder().decode(ProductsAllTypeRoot.self, from: value)
                         completion(Result.success(decodableValue))
                         //                        print(decodableValue)
                     } catch {
@@ -63,7 +63,7 @@ struct ProductsService: ProductsServiceType {
         }
     }
     
-    func fetchProductsBySearchingInType(type: String, keyword: String, completion: @escaping (Result<ProductsRoot>) -> ()) {
+    func fetchProductsBySearchingInType(type: String, keyword: String, completion: @escaping (Result<ProductsAllTypeRoot>) -> ()) {
         
         let api = "\(API.baseURL)" + "\(API.getProducts)" + "\(API.skinTypeURL)" + "\(type)" + "\(API.searchURL)" + "\(keyword)"
         Alamofire
@@ -73,7 +73,7 @@ struct ProductsService: ProductsServiceType {
                 switch response.result {
                 case .success(let value) :
                     do {
-                        let decodableValue = try JSONDecoder().decode(ProductsRoot.self, from: value)
+                        let decodableValue = try JSONDecoder().decode(ProductsAllTypeRoot.self, from: value)
                         completion(Result.success(decodableValue))
                         //                        print(decodableValue)
                     } catch {

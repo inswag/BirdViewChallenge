@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct ProductsRoot: Decodable {
+struct ProductsAllTypeRoot: Decodable {
     
-    let body: [Products]
+    let body: [ProductsAllType]
     
     enum CodingKeys: String, CodingKey {
         case body
@@ -18,23 +18,52 @@ struct ProductsRoot: Decodable {
     
 }
 
-struct Products: Decodable {
+struct ProductsAllType: Decodable {
     
     let id: Int
-    let thumbnail: String
-    let title: String
     let price: String
     let oilyScore: Int
-    let dryScore: Int
-    let sensitiveScore: Int
+    let thumbnail: String
+    let title: String
     
     enum CodingKeys: String, CodingKey {
         
         case thumbnail = "thumbnail_image"
         case oilyScore = "oily_score"
-        case dryScore = "dry_score"
-        case sensitiveScore = "sensitive_score"
         case id, title, price
     }
     
 }
+
+
+
+//struct ProductsAllTypeRoot: Decodable {
+//
+//    let body: [Products]
+//
+//    enum CodingKeys: String, CodingKey {
+//        case body
+//    }
+//
+//}
+//
+//struct Products: Decodable {
+//
+//    let id: Int
+//    let thumbnail: String
+//    let title: String
+//    let price: String
+//    let oilyScore: Int
+//    let dryScore: Int
+//    let sensitiveScore: Int
+//
+//    enum CodingKeys: String, CodingKey {
+//
+//        case thumbnail = "thumbnail_image"
+//        case oilyScore = "oily_score"
+//        case dryScore = "dry_score"
+//        case sensitiveScore = "sensitive_score"
+//        case id, title, price
+//    }
+//
+//}
