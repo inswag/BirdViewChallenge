@@ -24,7 +24,20 @@ class ProductsHeader: UICollectionReusableView {
     let typeButton: UIButton = {
         let btn = UIButton()
         btn.setImage(UIImage(named: "arrow_down_black"), for: .normal)
+        btn.addTarget(self, action: #selector(actionChooseType), for: .touchUpInside)
         return btn
+    }()
+    
+    @objc func actionChooseType() {
+//        self.pickerView.isHidden = false
+    }
+    
+    lazy var pickerView: UIPickerView = {
+        let pv = UIPickerView()
+        pv.backgroundColor = .white
+        pv.delegate = self
+//        pv.isHidden = true
+        return pv
     }()
     
     let bottomBorder: UIView = {
@@ -52,7 +65,7 @@ class ProductsHeader: UICollectionReusableView {
     func setupUIComponents() {
         //        backgroundColor = .blue
         
-        [typeName, typeButton, bottomBorder].forEach { self.addSubview($0) }
+        [typeName, typeButton, bottomBorder, pickerView].forEach { self.addSubview($0) }
         
         typeButton.snp.makeConstraints { (m) in
             m.centerY.equalToSuperview()
@@ -74,4 +87,30 @@ class ProductsHeader: UICollectionReusableView {
         }
         
     }
+    
+    let temporaryArray = ["모든 피부 타입", "지성", "건성", "민감성"]
+}
+
+// MARK:- UIPickerView
+
+extension ProductsHeader: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.temporaryArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return self.temporaryArray[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        // 타입을 선택했을 때 처리해줄 메서드 정의
+    }
+    
+    
 }
