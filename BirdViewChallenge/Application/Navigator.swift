@@ -14,7 +14,7 @@ class Navigator {
     
     // MARK: - segues list, all app scenes
     enum Scene {
-        case products(viewModel: ProductsViewModel)           // Products
+        case products(viewModel: ProductsControllerViewModel)           // Products
 //        case product            // Product
     }
     
@@ -22,7 +22,7 @@ class Navigator {
         
         switch segue {
         case .products(let viewModel):
-            return NavigationController(rootViewController: ProductsViewController(viewModel: viewModel,
+            return NavigationController(rootViewController: ProductsController(viewModel: viewModel,
                                                                                    navigator: self))
             //viewModel: viewModel, navigator: self)
 //        case .product: return ProductViewController()

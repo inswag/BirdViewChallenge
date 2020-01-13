@@ -1,5 +1,5 @@
 //
-//  ProductsViewModel.swift
+//  ProductsControllerViewModel.swift
 //  BirdViewChallenge
 //
 //  Created by 박인수 on 08/01/2020.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProductsViewModel {
+final class ProductsControllerViewModel {
     
     // MARK:- Properties
     
@@ -37,10 +37,7 @@ final class ProductsViewModel {
         productsService.fetchProductsAllType { (result) in
             switch result {
             case .success(let value):
-                value.body.forEach {
-                    self.fetchedProducts.append($0)
-                }
-                print(self.fetchedProducts.count)
+                value.body.forEach { self.fetchedProducts.append($0) }
                 completion()
             case .failure(let error):
                 print(error)

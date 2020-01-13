@@ -23,11 +23,14 @@ class ProductsHeader: UICollectionReusableView {
     
     let typeButton: UIButton = {
         let btn = UIButton()
-        btn.setTitle("타입", for: .normal)
-        btn.titleLabel?.font = Tools.font.appleSDGothicNeoBold(size: 14)
-        btn.titleLabel?.textColor = UIColor.colorWithHexString(hexString: Tools.color.black)
-        // Tod: - Text -> Image
+        btn.setImage(UIImage(named: "arrow_down_black"), for: .normal)
         return btn
+    }()
+    
+    let bottomBorder: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(r: 33, g: 47, b: 62, a: 0.1)
+        return view
     }()
     
     // MARK:- Initialize
@@ -37,7 +40,7 @@ class ProductsHeader: UICollectionReusableView {
         //        backgroundColor = .white
         //        self.setupUIComponents()
         //        self.imageView.rotate()
-        //        setupUIComponents()
+        setupUIComponents()
     }
     
     required init?(coder: NSCoder) {
@@ -47,9 +50,9 @@ class ProductsHeader: UICollectionReusableView {
     // MARK:- Methods
     
     func setupUIComponents() {
-        backgroundColor = .blue
+        //        backgroundColor = .blue
         
-        [typeName, typeButton].forEach { self.addSubview($0) }
+        [typeName, typeButton, bottomBorder].forEach { self.addSubview($0) }
         
         typeButton.snp.makeConstraints { (m) in
             m.centerY.equalToSuperview()
@@ -60,9 +63,15 @@ class ProductsHeader: UICollectionReusableView {
         
         typeName.snp.makeConstraints { (m) in
             m.centerY.equalTo(typeButton.snp.centerY)
-            m.trailing.equalTo(typeButton.snp.leading)
+            m.trailing.equalTo(typeButton.snp.leading).offset(5)
         }
         
+        bottomBorder.snp.makeConstraints { (m) in
+            m.leading.equalToSuperview()
+            m.trailing.equalToSuperview()
+            m.bottom.equalToSuperview()
+            m.height.equalTo(1)
+        }
         
     }
 }

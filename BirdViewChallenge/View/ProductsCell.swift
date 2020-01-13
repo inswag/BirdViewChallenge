@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProductsCell: CollectionViewCell {
     
@@ -42,6 +43,17 @@ class ProductsCell: CollectionViewCell {
         label.textColor = UIColor.colorWithHexString(hexString: Tools.color.darkGray)
         return label
     }()
+    
+    // MARK:- Properties
+    
+    var viewModel: ProductsCellViewModel! {
+      didSet {
+        let imageURL = URL(string: viewModel.thumbnail)
+        photoImageView.kf.setImage(with: imageURL)
+        productNameTitle.text = viewModel.title
+        priceNameTitle.text = viewModel.price
+      }
+    }
     
     // MARK:- Initialize
     

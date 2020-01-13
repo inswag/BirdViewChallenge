@@ -1,5 +1,5 @@
 //
-//  ProductsViewController.swift
+//  ProductsController.swift
 //  BirdViewChallenge
 //
 //  Created by 박인수 on 06/01/2020.
@@ -9,17 +9,16 @@
 import UIKit
 import SnapKit
 
-class ProductsViewController: ViewController {
+class ProductsController: ViewController {
     
     // MARK:- Properties
     
     let navigate: Navigator
-    let viewModel: ProductsViewModel
+    let viewModel: ProductsControllerViewModel
 
     // Network Property
     let productsService: ProductsServiceType = ProductsService()
-    var fetchedProducts: [ProductsAllType] = []
-    var page: Int = 2
+//    var page: Int = 2
     
     // MARK: - UI Properties
     
@@ -28,7 +27,7 @@ class ProductsViewController: ViewController {
         layout.footerReferenceSize = CGSize(width: view.frame.width, height: 96)
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = .red
+        cv.backgroundColor = .white
         cv.setCollectionViewLayout(layout, animated: true)
         cv.dataSource = self
         cv.delegate = self
@@ -51,7 +50,7 @@ class ProductsViewController: ViewController {
     
     // MARK:- Initialize
     
-    init(viewModel: ProductsViewModel, navigator: Navigator) {
+    init(viewModel: ProductsControllerViewModel, navigator: Navigator) {
         self.viewModel = viewModel
         self.navigate = navigator
         super.init()
@@ -110,21 +109,6 @@ class ProductsViewController: ViewController {
     
     fileprivate func fetchProductsAllType() {
         viewModel.fetchAllTypeProducts { self.collectionView.reloadData() }
-//        productsService.fetchProductsAllType { (result) in
-//            switch result {
-//            case .success(let value):
-//                value.body.forEach {
-//                    self.fetchedProducts.append($0)
-//                }
-//                print(self.fetchedProducts)
-//                self.collectionView.reloadData()
-//            case .failure(let error):
-//                print(error)
-//                //                self.since = 0
-//
-//            }
-//        }
-//        print("This is yours : \(self.fetchedProducts)")
     }
     
     fileprivate func paginateProducts() {
@@ -139,7 +123,7 @@ class ProductsViewController: ViewController {
 
 // MARK:- Search Bar Delegate
 
-extension ProductsViewController: UISearchBarDelegate {
+extension ProductsController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
@@ -158,7 +142,7 @@ extension ProductsViewController: UISearchBarDelegate {
 
 // MARK:- Collection View Data Source
 
-extension ProductsViewController: UICollectionViewDataSource {
+extension ProductsController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -168,13 +152,12 @@ extension ProductsViewController: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsHeader.self), for: indexPath) as! ProductsHeader
-            header.backgroundColor = .black
+            header.backgroundColor = .white
             return header
         case UICollectionView.elementKindSectionFooter:
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsFooter.self), for: indexPath) as! ProductsFooter
             footer.backgroundColor = .blue
             return footer
-            
         default:
             return UICollectionReusableView()
         }
@@ -186,31 +169,15 @@ extension ProductsViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductsCell.self), for: indexPath) as! ProductsCell
-        cell.backgroundColor = .white
-        
+        cell.viewModel = ProductsCellViewModel(content: viewModel.fetchedProducts[indexPath.row])
         return cell
     }
-    
-    // Handle Collection View Header & Footer
-    //
-    //    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    //        switch kind {
-    //        case UICollectionView.elementKindSectionHeader:
-    //            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsHeader.self), for: indexPath) as! ProductsHeader
-    //
-    //
-    //            return header
-    //        default:
-    //            return UICollectionReusableView()
-    //        }
-    //    }
-    
     
 }
 
 // MARK:- Collection View Delegate
 
-extension ProductsViewController: UICollectionViewDelegateFlowLayout {
+extension ProductsController: UICollectionViewDelegateFlowLayout {
     
     
     

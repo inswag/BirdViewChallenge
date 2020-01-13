@@ -6,4 +6,24 @@
 //  Copyright © 2020 inswag. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class ProductsCellViewModel {
+    
+    // MARK:- Properties
+
+    let id: Int
+    let price: String
+    let oilyScore: Int
+    let thumbnail: String
+    let title: String
+    
+    init(content: ProductsAllType) {
+        self.id = content.id
+        self.price = content.price
+        self.oilyScore = content.oilyScore
+        self.thumbnail = content.thumbnail
+        self.title = content.title
+    }
+
+}

@@ -22,7 +22,7 @@ final class Application: NSObject {
     
     func presentInitialScreen(in window: UIWindow) {
         self.window = window
-        let productsViewModel = ProductsViewModel()
-        window.rootViewController = self.navigator.get(segue: .products(viewModel: productsViewModel))
+        let productsControllerViewModel = ProductsControllerViewModel()
+        window.rootViewController = self.navigator.get(segue: .products(viewModel: productsControllerViewModel))
     }
 }
