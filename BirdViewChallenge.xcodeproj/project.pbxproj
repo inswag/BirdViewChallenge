@@ -35,7 +35,6 @@
 		F960B48523C849C000F488F8 /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960B48423C849C000F488F8 /* ProductService.swift */; };
 		F960B48823C84F9600F488F8 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960B48723C84F9600F488F8 /* Products.swift */; };
 		F960B48A23C84FA200F488F8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960B48923C84FA200F488F8 /* Product.swift */; };
-		F977140D23C95D6800F08A35 /* ProductsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F977140C23C95D6800F08A35 /* ProductsHeader.swift */; };
 		FD948157A1E5BDAEAE336AFF /* Pods_BirdViewChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F3CF681C11660BC0124203 /* Pods_BirdViewChallenge.framework */; };
 /* End PBXBuildFile section */
 
@@ -97,7 +96,6 @@
 		F960B48423C849C000F488F8 /* ProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductService.swift; sourceTree = "<group>"; };
 		F960B48723C84F9600F488F8 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		F960B48923C84FA200F488F8 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
-		F977140C23C95D6800F08A35 /* ProductsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsHeader.swift; sourceTree = "<group>"; };
 		FACE9E0691148D3274BC1901 /* Pods-BirdViewChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirdViewChallenge.release.xcconfig"; path = "Target Support Files/Pods-BirdViewChallenge/Pods-BirdViewChallenge.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,7 +269,6 @@
 		F960B47223C5ABC300F488F8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F977140C23C95D6800F08A35 /* ProductsHeader.swift */,
 				F960B47323C5ABE000F488F8 /* ProductsCell.swift */,
 				F960B47D23C7010900F488F8 /* ProductsFooter.swift */,
 			);
@@ -556,7 +553,6 @@
 				F960B48823C84F9600F488F8 /* Products.swift in Sources */,
 				F960B47623C5ABF400F488F8 /* ProductsCellViewModel.swift in Sources */,
 				F960B48323C849B400F488F8 /* ProductsService.swift in Sources */,
-				F977140D23C95D6800F08A35 /* ProductsHeader.swift in Sources */,
 				F960B48A23C84FA200F488F8 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
