@@ -16,6 +16,9 @@ final class ProductsControllerViewModel {
     var fetchedProducts: [ProductsAllType] = []
     var page: Int = 1
     
+    // PickerView Property
+    let typeArray = ["모든 피부 타입", "지성", "건성", "민감성"]
+    
     // MARK:- Initialize
     
     init() {

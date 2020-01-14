@@ -20,8 +20,6 @@ class ProductsController: ViewController {
     let productsService: ProductsServiceType = ProductsService()
 //    var page: Int = 2
     
-    // PickerView Property
-    let temporaryArray = ["모든 피부 타입", "지성", "건성", "민감성"]
     
     // MARK: - UI Properties
     
@@ -34,7 +32,6 @@ class ProductsController: ViewController {
         cv.setCollectionViewLayout(layout, animated: true)
         cv.dataSource = self
         cv.delegate = self
-//        cv.register(ProductsHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: ProductsHeader.self))
         cv.register(ProductsFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: ProductsFooter.self))
         cv.register(ProductsCell.self, forCellWithReuseIdentifier: String(describing: ProductsCell.self))
         
@@ -83,18 +80,26 @@ class ProductsController: ViewController {
     }()
 
     @objc func actionClickButton() {
-//        delegate?.actionButton()
-        print("???")
+        self.pickerContainer.becomeFirstResponder()
     }
+    
+    lazy var pickerContainer: UITextField = {
+        let tf = UITextField()
+        tf.borderStyle = .none
+        tf.tintColor = .clear
+        tf.delegate = self
+        tf.inputView = self.pickerView
+        return tf
+    }()
     
     lazy var pickerView: UIPickerView = {
         let pv = UIPickerView()
-        pv.backgroundColor = .black
-//        pv.delegate = self
+        pv.backgroundColor = UIColor.colorWithHexString(hexString: "#9013FE")
+        pv.tintColor = .white
+        pv.delegate = self
         pv.isHidden = false
         return pv
     }()
-    
     
     // MARK:- Initialize
     
@@ -107,6 +112,7 @@ class ProductsController: ViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     
     
     // MARK:- View Life Cycle
@@ -124,13 +130,20 @@ class ProductsController: ViewController {
         
         [headerView, collectionView].forEach { self.view.addSubview($0) }
         
-        let height = Int((UIApplication.shared.statusBarFrame.height) ?? 0 ) + Int((self.navigationController?.navigationBar.frame.height) ?? 0.0)
+        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
+        let height = (self.navigationController?.navigationBar.frame.height ?? 0.0)
+        
         headerView.snp.makeConstraints { (m) in
-            m.top.equalToSuperview().offset(height)
+            if #available(iOS 13.0, *) {
+                m.top.equalToSuperview().offset(height + (window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 80.0))
+            } else {
+                m.top.equalToSuperview().offset(height + UIApplication.shared.statusBarFrame.height)
+            }
             m.leading.equalToSuperview()
             m.trailing.equalToSuperview()
             m.height.equalTo(50)
         }
+        
         collectionView.snp.makeConstraints { (m) in
             m.top.equalTo(headerView.snp.bottom)
             m.leading.equalToSuperview()
@@ -140,34 +153,26 @@ class ProductsController: ViewController {
         
         // Components in Header View
         
-        [typeName, typeButton].forEach { self.headerView.addSubview($0) }
+        [typeName, pickerContainer].forEach { self.headerView.addSubview($0) }
 
-        typeButton.snp.makeConstraints { (m) in
+        pickerContainer.snp.makeConstraints { (m) in
             m.centerY.equalToSuperview()
             m.trailing.equalToSuperview().offset(-12)
             m.width.equalTo(24)
             m.height.equalTo(24)
         }
-
+        
         typeName.snp.makeConstraints { (m) in
-            m.centerY.equalTo(typeButton.snp.centerY)
-            m.trailing.equalTo(typeButton.snp.leading).offset(5)
+            m.centerY.equalTo(pickerContainer.snp.centerY)
+            m.trailing.equalTo(pickerContainer.snp.leading).offset(5)
         }
         
+        [typeButton].forEach { self.pickerContainer.addSubview($0) }
+        typeButton.snp.makeConstraints { $0.edges.equalToSuperview() }
         
         // UISearchBar
         
         navigationController?.navigationBar.addSubview(searchBar)
-        
-        // UIPickerView
-        
-//        [pickerView].forEach { self.view.addSubview($0) }
-//        pickerView.snp.makeConstraints { (m) in
-//            m.leading.equalToSuperview()
-//            m.trailing.equalToSuperview()
-//            m.bottom.equalToSuperview()
-//            m.height.equalTo(240)
-//        }
         
         // - Access To UISearchBar Glass Icon
         
@@ -329,25 +334,34 @@ extension ProductsController: UICollectionViewDelegateFlowLayout {
 //}
 
 // MARK:- UIPickerView
-//
-//extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
-//
-//    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-//        return 1
-//    }
-//
-//
-//    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        return self.temporaryArray.count
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        return self.temporaryArray[row]
-//    }
-//
-//    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//
-//    }
-//
-//
-//}
+
+extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
+
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+
+
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return viewModel.typeArray.count
+    }
+
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return viewModel.typeArray[row]
+    }
+
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print(viewModel.typeArray[row])
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.typeName.text = self.viewModel.typeArray[row]
+            self.pickerContainer.resignFirstResponder()
+        }
+    }
+
+
+}
+
+extension ProductsController: UITextFieldDelegate {
+    
+    
+}
