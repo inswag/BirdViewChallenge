@@ -15,6 +15,7 @@ final class Application: NSObject {
     var window: UIWindow?
     var navigator: Navigator
     
+    
     private override init() {
         self.navigator = Navigator()
         super.init()
@@ -23,6 +24,7 @@ final class Application: NSObject {
     func presentInitialScreen(in window: UIWindow) {
         self.window = window
         let productsControllerViewModel = ProductsControllerViewModel()
-        window.rootViewController = self.navigator.get(segue: .products(viewModel: productsControllerViewModel))
+        let provider = NetworkManager()
+        window.rootViewController = self.navigator.get(segue: .products(viewModel: productsControllerViewModel, provider: provider))
     }
 }

@@ -8,6 +8,7 @@ target 'BirdViewChallenge' do
  pod 'SnapKit'
  pod 'Alamofire'
  pod 'Kingfisher'
+ pod 'Moya', '~> 13.0'
 
   # Pods for BirdViewChallenge
 

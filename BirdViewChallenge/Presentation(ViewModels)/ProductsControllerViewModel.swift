@@ -12,7 +12,8 @@ final class ProductsControllerViewModel {
     
     // MARK:- Properties
     
-    let productsService: ProductsService = ProductsService()
+    let provider = NetworkManager()
+//    let productsService: ProductsService = ProductsService()
     var fetchedProducts: [ProductsAllType] = []
     var page: Int = 1
     
@@ -36,16 +37,25 @@ final class ProductsControllerViewModel {
     
     // MARK:- Methods
     
-    func fetchAllTypeProducts(completion: @escaping () -> Void) {
-        productsService.fetchProductsAllType { (result) in
-            switch result {
-            case .success(let value):
-                value.body.forEach { self.fetchedProducts.append($0) }
-                completion()
-            case .failure(let error):
-                print(error)
-                //                self.since = 0
+//    func fetchAllTypeProducts(completion: @escaping () -> Void) {
+//        productsService.fetchProductsAllType { (result) in
+//            switch result {
+//            case .success(let value):
+//                value.body.forEach { self.fetchedProducts.append($0) }
+//                completion()
+//            case .failure(let error):
+//                print(error)
+//                //                self.since = 0
+//            }
+//        }
+//    }
+    
+    func fetchAllTypeProducts(completion: @escaping () -> ()) {
+        provider.fetchAllTypeProducts { (response) in
+            response.body.forEach {
+                self.fetchedProducts.append($0)
             }
+            completion()
         }
     }
     

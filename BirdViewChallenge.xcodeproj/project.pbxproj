@@ -11,6 +11,8 @@
 		5F7B26A0718DA283B07FD2B5 /* Pods_BirdViewChallenge_BirdViewChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6FA1D6836C373C10CC908E7 /* Pods_BirdViewChallenge_BirdViewChallengeUITests.framework */; };
 		F92C268C23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F92C268B23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf */; };
 		F92C268E23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F92C268D23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf */; };
+		F940CABF23CECA7E0018927C /* BirdViewApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940CABE23CECA7E0018927C /* BirdViewApi.swift */; };
+		F940CAC123CEEAEE0018927C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940CAC023CEEAEE0018927C /* NetworkManager.swift */; };
 		F95E62C723C2D4A8008F7805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E62C623C2D4A8008F7805 /* AppDelegate.swift */; };
 		F95E62CB23C2D4A8008F7805 /* ProductsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E62CA23C2D4A8008F7805 /* ProductsController.swift */; };
 		F95E62D023C2D4A9008F7805 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F95E62CF23C2D4A9008F7805 /* Assets.xcassets */; };
@@ -66,6 +68,8 @@
 		F6396DBFC63910A56CDAA107 /* Pods_BirdViewChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BirdViewChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F92C268B23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Black.otf"; sourceTree = "<group>"; };
 		F92C268D23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Bold.otf"; sourceTree = "<group>"; };
+		F940CABE23CECA7E0018927C /* BirdViewApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewApi.swift; sourceTree = "<group>"; };
+		F940CAC023CEEAEE0018927C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F95E62C323C2D4A8008F7805 /* BirdViewChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirdViewChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F95E62C623C2D4A8008F7805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F95E62CA23C2D4A8008F7805 /* ProductsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsController.swift; sourceTree = "<group>"; };
@@ -281,6 +285,8 @@
 				F960B48023C8494400F488F8 /* API.swift */,
 				F960B48223C849B400F488F8 /* ProductsService.swift */,
 				F960B48423C849C000F488F8 /* ProductService.swift */,
+				F940CABE23CECA7E0018927C /* BirdViewApi.swift */,
+				F940CAC023CEEAEE0018927C /* NetworkManager.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -537,6 +543,8 @@
 				F95E62F723C30751008F7805 /* Application.swift in Sources */,
 				F960B47E23C7010900F488F8 /* ProductsFooter.swift in Sources */,
 				F95E62FA23C307AA008F7805 /* Navigator.swift in Sources */,
+				F940CABF23CECA7E0018927C /* BirdViewApi.swift in Sources */,
+				F940CAC123CEEAEE0018927C /* NetworkManager.swift in Sources */,
 				F960B48523C849C000F488F8 /* ProductService.swift in Sources */,
 				F95E630223C30928008F7805 /* Font.swift in Sources */,
 				F960B47123C597BD00F488F8 /* ProductsControllerViewModel.swift in Sources */,

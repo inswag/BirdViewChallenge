@@ -15,7 +15,8 @@ class ProductsController: ViewController {
     
     let navigate: Navigator
     let viewModel: ProductsControllerViewModel
-
+    let provider: NetworkManager
+    
     // Network Property
     let productsService: ProductsServiceType = ProductsService()
 //    var page: Int = 2
@@ -87,7 +88,6 @@ class ProductsController: ViewController {
         let tf = UITextField()
         tf.borderStyle = .none
         tf.tintColor = .clear
-        tf.delegate = self
         tf.inputView = self.pickerView
         return tf
     }()
@@ -103,8 +103,9 @@ class ProductsController: ViewController {
     
     // MARK:- Initialize
     
-    init(viewModel: ProductsControllerViewModel, navigator: Navigator) {
+    init(viewModel: ProductsControllerViewModel, navigator: Navigator, provider: NetworkManager) {
         self.viewModel = viewModel
+        self.provider = provider
         self.navigate = navigator
         super.init()
     }
@@ -270,12 +271,6 @@ extension ProductsController: UICollectionViewDataSource {
 
 extension ProductsController: UICollectionViewDelegateFlowLayout {
     
-    
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//        return CGSize(width: self.view.frame.width, height: 50)
-//    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: self.view.frame.width, height: 50)
     }
@@ -359,9 +354,4 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
 
-}
-
-extension ProductsController: UITextFieldDelegate {
-    
-    
 }
