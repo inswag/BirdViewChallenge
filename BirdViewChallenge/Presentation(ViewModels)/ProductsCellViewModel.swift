@@ -14,14 +14,18 @@ class ProductsCellViewModel {
 
     let id: Int
     let price: String
-    let oilyScore: Int
+    let oilyScore: Int?
+    let dryScore: Int?
+    let sensativeScore: Int?
     let thumbnail: String
     let title: String
     
-    init(content: ProductsAllType) {
+    init(content: Products) {
         self.id = content.id
         self.price = content.price
         self.oilyScore = content.oilyScore
+        self.dryScore = content.dryScore
+        self.sensativeScore = content.sensativeScore
         self.thumbnail = content.thumbnail
         self.title = content.title
     }

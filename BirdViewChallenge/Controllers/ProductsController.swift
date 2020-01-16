@@ -15,10 +15,10 @@ class ProductsController: ViewController {
     
     let navigate: Navigator
     let viewModel: ProductsControllerViewModel
-    let provider: NetworkManager
+    
     
     // Network Property
-    let productsService: ProductsServiceType = ProductsService()
+    let provider: NetworkManager
 //    var page: Int = 2
     
     
@@ -302,31 +302,8 @@ extension ProductsController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 7
     }
-    //    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    //
-    //        switch kind {
-    //        case UICollectionView.elementKindSectionHeader:
-    //            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsHeader.self), for: indexPath) as! ProductsHeader
-    //
-    //            return header
-    //        default:
-    //            return UICollectionReusableView()
-    //        }
-    //
-    //    }
-    
-    
     
 }
-
-//extension ProductsController: ProductsHeaderDelegate {
-//
-//    func actionButton() {
-//        self.pickerView.isHidden = true
-//        print("sss")
-//    }
-//
-//}
 
 // MARK:- UIPickerView
 
@@ -346,7 +323,20 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        print(viewModel.typeArray[row])
+        
+        switch ProductsControllerViewModel.Types(rawValue: row) {
+        case .`default`:
+            viewModel.fetchAllTypeProducts { self.collectionView.reloadData() }
+        case .oily:
+            viewModel.fetchProductsByType(skinType: "oily") { self.collectionView.reloadData() }
+        case .dry:
+            viewModel.fetchProductsByType(skinType: "dry") { self.collectionView.reloadData() }
+        case .sensitive:
+            viewModel.fetchProductsByType(skinType: "sensitive") { self.collectionView.reloadData() }
+        default   :
+            print("해당 없음")
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.typeName.text = self.viewModel.typeArray[row]
             self.pickerContainer.resignFirstResponder()

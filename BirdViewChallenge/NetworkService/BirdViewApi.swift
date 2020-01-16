@@ -23,24 +23,13 @@ public enum BirdViewApi {
 extension BirdViewApi: TargetType {
     
     // 1
-    
     public var baseURL: URL {
         return URL(string: "https://6uqljnm1pb.execute-api.ap-northeast-2.amazonaws.com/prod")!
     }
     
     // 2
-    
     public var path: String {
-        switch self {
-        case .allType:
-            return "/products"
-        case .productsByType:
-            return "/products"
-        case .productsBySearch:
-            return "/products"
-        case .productSelected:
-            return "/products"
-        }
+        return "/products"
     }
     
     // 3
@@ -53,13 +42,11 @@ extension BirdViewApi: TargetType {
     }
     
     // 4
-    
     public var sampleData: Data {
         return Data()
     }
     
     // 5 - Parameter 에 대한 처리가 들어가야함.
-    
     public var task: Task {
         switch self {
         case .allType:
@@ -71,14 +58,12 @@ extension BirdViewApi: TargetType {
         case .productSelected(let id):
             return .requestParameters(parameters: ["id": id], encoding: URLEncoding.queryString)
         }
-        
     }
     
     // 6
     public var headers: [String : String]? {
         return ["Content-Type": "application/json"]
     }
-    
     // 7
     public var validationType: ValidationType {
         return .successCodes

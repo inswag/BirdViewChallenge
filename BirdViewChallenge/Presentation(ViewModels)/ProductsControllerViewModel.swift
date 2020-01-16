@@ -13,12 +13,18 @@ final class ProductsControllerViewModel {
     // MARK:- Properties
     
     let provider = NetworkManager()
-//    let productsService: ProductsService = ProductsService()
-    var fetchedProducts: [ProductsAllType] = []
-    var page: Int = 1
+    var fetchedProducts: [Products] = []
+    
     
     // PickerView Property
     let typeArray = ["모든 피부 타입", "지성", "건성", "민감성"]
+    
+    enum Types: Int {
+        case `default`
+        case oily
+        case dry
+        case sensitive
+    }
     
     // MARK:- Initialize
     
@@ -37,26 +43,22 @@ final class ProductsControllerViewModel {
     
     // MARK:- Methods
     
-//    func fetchAllTypeProducts(completion: @escaping () -> Void) {
-//        productsService.fetchProductsAllType { (result) in
-//            switch result {
-//            case .success(let value):
-//                value.body.forEach { self.fetchedProducts.append($0) }
-//                completion()
-//            case .failure(let error):
-//                print(error)
-//                //                self.since = 0
-//            }
-//        }
-//    }
-    
     func fetchAllTypeProducts(completion: @escaping () -> ()) {
+        if self.fetchedProducts.count != 0 { self.fetchedProducts.removeAll() }
         provider.fetchAllTypeProducts { (response) in
-            response.body.forEach {
-                self.fetchedProducts.append($0)
-            }
+            response.body.forEach { self.fetchedProducts.append($0) }
             completion()
         }
+        
+    }
+    
+    func fetchProductsByType(skinType: String, page: Int = 1, completion: @escaping () -> ()) {
+        provider.fetchProductsByType(skinType: skinType, page: page) { (response) in
+            self.fetchedProducts.removeAll()
+            response.body.forEach { self.fetchedProducts.append($0) }
+            completion()
+        }
+        
     }
     
 }

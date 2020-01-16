@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct ProductsAllTypeRoot: Decodable {
+struct ProductsRoot: Decodable {
     
-    let body: [ProductsAllType]
+    let body: [Products]
     
     enum CodingKeys: String, CodingKey {
         case body
@@ -18,11 +18,13 @@ struct ProductsAllTypeRoot: Decodable {
     
 }
 
-struct ProductsAllType: Decodable {
+struct Products: Decodable {
     
     let id: Int
     let price: String
-    let oilyScore: Int
+    let oilyScore: Int?
+    let dryScore: Int?
+    let sensativeScore: Int?
     let thumbnail: String
     let title: String
     
@@ -30,6 +32,8 @@ struct ProductsAllType: Decodable {
         
         case thumbnail = "thumbnail_image"
         case oilyScore = "oily_score"
+        case dryScore = "dry_score"
+        case sensativeScore = "sensative_score"
         case id, title, price
     }
     

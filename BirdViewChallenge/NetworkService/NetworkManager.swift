@@ -12,7 +12,7 @@ protocol Networkable {
     
     var provider: MoyaProvider<BirdViewApi> { get }
     
-    func fetchAllTypeProducts(completion: @escaping (ProductsAllTypeRoot) -> ())
+    func fetchAllTypeProducts(completion: @escaping (ProductsRoot) -> ())
     
 }
 
@@ -22,12 +22,12 @@ struct NetworkManager: Networkable {
     // keep our provider private as we do not want anyone outside of this file to access the provider directly
     internal let provider = MoyaProvider<BirdViewApi>(plugins: [NetworkLoggerPlugin(verbose: true)])
     
-    func fetchAllTypeProducts(completion: @escaping (ProductsAllTypeRoot) -> ()) {
+    func fetchAllTypeProducts(completion: @escaping (ProductsRoot) -> ()) {
         provider.request(.allType) { result in
             switch result {
             case let .success(response):
                 do {
-                    let results = try JSONDecoder().decode(ProductsAllTypeRoot.self, from: response.data)
+                    let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
                     completion(results)
                 } catch let err {
                     print(err)
@@ -37,5 +37,24 @@ struct NetworkManager: Networkable {
             }
         }
     }
+    
+    func fetchProductsByType(skinType: String, page: Int, completion: @escaping (ProductsRoot) -> ()) {
+        provider.request(.productsByType(type: skinType, page: page)) { (result) in
+            switch result {
+            case let .success(response):
+                do {
+                    let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
+                    completion(results)
+                } catch let err {
+                    print(err)
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    
     
 }
