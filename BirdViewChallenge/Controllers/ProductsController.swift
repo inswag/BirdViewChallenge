@@ -33,9 +33,10 @@ class ProductsController: ViewController {
         cv.setCollectionViewLayout(layout, animated: true)
         cv.dataSource = self
         cv.delegate = self
-        cv.register(ProductsFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: ProductsFooter.self))
+        cv.register(ProductsFooter.self,
+                    forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                    withReuseIdentifier: String(describing: ProductsFooter.self))
         cv.register(ProductsCell.self, forCellWithReuseIdentifier: String(describing: ProductsCell.self))
-        
         return cv
     }()
     
@@ -56,9 +57,7 @@ class ProductsController: ViewController {
         view.addSubview(bottomBorder)
         bottomBorder.backgroundColor = UIColor.rgb(r: 33, g: 47, b: 62, a: 0.1)
         bottomBorder.snp.makeConstraints { (m) in
-            m.leading.equalToSuperview()
-            m.trailing.equalToSuperview()
-            m.bottom.equalToSuperview()
+            m.leading.trailing.bottom.equalToSuperview()
             m.height.equalTo(1)
         }
         return view
@@ -129,6 +128,7 @@ class ProductsController: ViewController {
         
         // Components in VC
         
+        self.view.backgroundColor = .white
         [headerView, collectionView].forEach { self.view.addSubview($0) }
         
         let window = UIApplication.shared.windows.first { $0.isKeyWindow }
@@ -136,7 +136,7 @@ class ProductsController: ViewController {
         
         headerView.snp.makeConstraints { (m) in
             if #available(iOS 13.0, *) {
-                m.top.equalToSuperview().offset(height + (window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 80.0))
+                m.top.equalToSuperview().offset(height + (window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 90.0))
             } else {
                 m.top.equalToSuperview().offset(height + UIApplication.shared.statusBarFrame.height)
             }
@@ -147,9 +147,7 @@ class ProductsController: ViewController {
         
         collectionView.snp.makeConstraints { (m) in
             m.top.equalTo(headerView.snp.bottom)
-            m.leading.equalToSuperview()
-            m.trailing.equalToSuperview()
-            m.bottom.equalToSuperview()
+            m.leading.trailing.bottom.equalToSuperview()
         }
         
         // Components in Header View
@@ -190,9 +188,9 @@ class ProductsController: ViewController {
         textFieldInsideSearchBarLabel.textColor = UIColor.colorWithHexString(hexString: Tools.color.gray, alpha: 0.4)
         self.searchBar.snp.makeConstraints { (m) in
             m.top.equalToSuperview()
-            m.leading.equalToSuperview().offset(12)
+            m.leading.bottom.equalToSuperview().offset(12)
             m.trailing.equalToSuperview().offset(-12)
-            m.bottom.equalToSuperview().offset(-12)
+            m.bottom.equalToSuperview().offset(-8)
         }
         
     }
@@ -203,11 +201,14 @@ class ProductsController: ViewController {
         viewModel.fetchAllTypeProducts { self.collectionView.reloadData() }
     }
     
-    fileprivate func paginateProducts() {
-//        print("will Paginate User List!")
-//        print("pageNumber: ", page)
-//        fetchProducts(since: page)
-//        page += 1
+    // MARK:- Hide/Show Header Method
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+         
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
     }
     
     
@@ -242,10 +243,6 @@ extension ProductsController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
-//        case UICollectionView.elementKindSectionHeader:
-//            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsHeader.self), for: indexPath) as! ProductsHeader
-//            header.backgroundColor = .white
-//            return header
         case UICollectionView.elementKindSectionFooter:
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsFooter.self), for: indexPath) as! ProductsFooter
             footer.backgroundColor = .blue
@@ -263,6 +260,19 @@ extension ProductsController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductsCell.self), for: indexPath) as! ProductsCell
         cell.viewModel = ProductsCellViewModel(content: viewModel.fetchedProducts[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        if indexPath.row == viewModel.fetchedProducts.count - 1 {
+//            if typeName.text != "모든 피부 타입" {
+//                viewModel.paginateProducts(skinType: "sensitive")
+//            }
+//            
+//        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.present(navigate.get(segue: .product), animated: true, completion: nil)
     }
     
 }
@@ -312,7 +322,6 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-
 
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return viewModel.typeArray.count

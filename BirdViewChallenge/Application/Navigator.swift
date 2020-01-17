@@ -14,19 +14,25 @@ class Navigator {
     
     // MARK: - segues list, all app scenes
     enum Scene {
-        case products(viewModel: ProductsControllerViewModel, provider: NetworkManager)           // Products
-//        case product            // Product
+        case products(viewModel: ProductsControllerViewModel, provider: NetworkManager) // Products
+        case product // Product
     }
     
     func get(segue: Scene) -> UIViewController {
-        
         switch segue {
         case .products(let viewModel, let provider):
-            return NavigationController(rootViewController: ProductsController(viewModel: viewModel, navigator: self, provider: provider))
+            let productsVC = ProductsController(viewModel: viewModel, navigator: self, provider: provider)
+            productsVC.modalPresentationStyle = .fullScreen
+            let naviProducts = NavigationController(rootViewController: productsVC)
+            return naviProducts
+        case .product:
+            let productVC = ProductController(navigator: self)
+            productVC.modalPresentationStyle = .fullScreen
+            return productVC
             //viewModel: viewModel, navigator: self)
 //        case .product: return ProductViewController()
 //        case .product:
-//            <#code#>
+//
         }
         
     }

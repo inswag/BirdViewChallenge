@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		599B34E4C91C01A1E9064D18 /* Pods_BirdViewChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6396DBFC63910A56CDAA107 /* Pods_BirdViewChallengeTests.framework */; };
 		5F7B26A0718DA283B07FD2B5 /* Pods_BirdViewChallenge_BirdViewChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6FA1D6836C373C10CC908E7 /* Pods_BirdViewChallenge_BirdViewChallengeUITests.framework */; };
+		F90574F523D196DA00B5BB0A /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90574F423D196DA00B5BB0A /* ProductController.swift */; };
 		F92C268C23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F92C268B23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf */; };
 		F92C268E23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F92C268D23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf */; };
 		F940CABF23CECA7E0018927C /* BirdViewApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940CABE23CECA7E0018927C /* BirdViewApi.swift */; };
@@ -66,6 +67,7 @@
 		CA19B278A953E32C57F653CD /* Pods-BirdViewChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirdViewChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-BirdViewChallengeTests/Pods-BirdViewChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		E5A095A92305C9C4DB02436D /* Pods-BirdViewChallenge-BirdViewChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirdViewChallenge-BirdViewChallengeUITests.release.xcconfig"; path = "Target Support Files/Pods-BirdViewChallenge-BirdViewChallengeUITests/Pods-BirdViewChallenge-BirdViewChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F6396DBFC63910A56CDAA107 /* Pods_BirdViewChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BirdViewChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F90574F423D196DA00B5BB0A /* ProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
 		F92C268B23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Black.otf"; sourceTree = "<group>"; };
 		F92C268D23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Bold.otf"; sourceTree = "<group>"; };
 		F940CABE23CECA7E0018927C /* BirdViewApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewApi.swift; sourceTree = "<group>"; };
@@ -163,6 +165,22 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		F940CAC223D03E350018927C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F960B47323C5ABE000F488F8 /* ProductsCell.swift */,
+				F960B47D23C7010900F488F8 /* ProductsFooter.swift */,
+			);
+			path = Products;
+			sourceTree = "<group>";
+		};
+		F940CAC323D03E440018927C /* Product */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
 		F95E62BA23C2D4A8008F7805 = {
 			isa = PBXGroup;
 			children = (
@@ -236,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				F95E62CA23C2D4A8008F7805 /* ProductsController.swift */,
+				F90574F423D196DA00B5BB0A /* ProductController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -273,8 +292,8 @@
 		F960B47223C5ABC300F488F8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F960B47323C5ABE000F488F8 /* ProductsCell.swift */,
-				F960B47D23C7010900F488F8 /* ProductsFooter.swift */,
+				F940CAC223D03E350018927C /* Products */,
+				F940CAC323D03E440018927C /* Product */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -557,6 +576,7 @@
 				F95E630923C30AA9008F7805 /* NavigationController.swift in Sources */,
 				F95E630623C30999008F7805 /* Anchor.swift in Sources */,
 				F95E630423C30961008F7805 /* Tools.swift in Sources */,
+				F90574F523D196DA00B5BB0A /* ProductController.swift in Sources */,
 				F960B48123C8494400F488F8 /* API.swift in Sources */,
 				F960B48823C84F9600F488F8 /* Products.swift in Sources */,
 				F960B47623C5ABF400F488F8 /* ProductsCellViewModel.swift in Sources */,

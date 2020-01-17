@@ -30,15 +30,15 @@ final class ProductsControllerViewModel {
     
     init() {
     }
-
+    
     // MARK:- Data Source
     
     func numberOfSections() -> Int {
         return 1
     }
-
+    
     func numberOfItemsInSection() -> Int {
-      return self.fetchedProducts.count
+        return self.fetchedProducts.count
     }
     
     // MARK:- Methods
@@ -58,7 +58,20 @@ final class ProductsControllerViewModel {
             response.body.forEach { self.fetchedProducts.append($0) }
             completion()
         }
+    }
+    
+//    var page = 2
+    
+    func paginateProducts(skinType: String) {
+        //        print("will Paginate User List!")
+        //        print("pageNumber: ", page)
+        //        fetchProducts(since: page)
         
+//        provider.fetchProductsByType(skinType: skinType, page: page) { (response) in
+//            response.body.forEach { self.fetchedProducts.append($0) }
+//            self.page += 1
+//            print(self.page)
+//        }
     }
     
 }

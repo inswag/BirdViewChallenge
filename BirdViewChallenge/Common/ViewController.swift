@@ -13,7 +13,7 @@ class ViewController: UIViewController {
     
 
     // MARK:- Initialize
-    
+     
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -26,14 +26,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUICommonComponents()
         setupUIComponents()
     }
     
     // MARK:- UI Methods
-    func setupUICommonComponents() {
-        self.view.backgroundColor = .white
-    }
+
     
     func setupUIComponents() {
         
