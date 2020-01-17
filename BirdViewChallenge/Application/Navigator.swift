@@ -27,7 +27,7 @@ class Navigator {
             return naviProducts
         case .product:
             let productVC = ProductController(navigator: self)
-            productVC.modalPresentationStyle = .fullScreen
+            productVC.modalPresentationStyle = .overCurrentContext
             return productVC
             //viewModel: viewModel, navigator: self)
 //        case .product: return ProductViewController()

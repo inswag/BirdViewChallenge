@@ -35,7 +35,14 @@ class ProductController: ViewController {
     // MARK:- UI Method
 
     override func setupUIComponents() {
-        self.view.backgroundColor = .black
+        
+        // transparent background
+        self.view.isOpaque = false
+        self.view.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+        
+        // 
+        
+        
     }
     
     
