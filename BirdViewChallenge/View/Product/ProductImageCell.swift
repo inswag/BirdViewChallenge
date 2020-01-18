@@ -16,8 +16,14 @@ class ProductImageCell: UITableViewCell {
         let iv = UIImageView()
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
-        iv.backgroundColor = .red
+        iv.backgroundColor = .white
         return iv
+    }()
+    
+    let borderView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.colorWithHexString(hexString: Tools.color.grayWhite)
+        return view
     }()
     
     // MARK:- Initialize
@@ -38,9 +44,17 @@ class ProductImageCell: UITableViewCell {
         clipsToBounds = true
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
-        [productImage].forEach { self.addSubview($0) }
-        productImage.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+        [productImage, borderView].forEach { self.addSubview($0) }
+        
+        borderView.snp.makeConstraints { (m) in
+            m.leading.trailing.bottom.equalToSuperview()
+            m.height.equalTo(1)
+        }
+        
+        productImage.snp.makeConstraints { (m) in
+            m.top.leading.trailing.equalToSuperview()
+            m.bottom.equalTo(borderView.snp.top)
+            
         }
     }
     

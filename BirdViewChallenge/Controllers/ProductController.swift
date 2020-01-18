@@ -27,23 +27,23 @@ class ProductController: ViewController {
     
     lazy var tableView: UITableView = {
         let tv = UITableView()
-        tv.backgroundColor = .white
+        tv.backgroundColor = .clear
         tv.separatorStyle = .none
         tv.showsVerticalScrollIndicator = false
         tv.dataSource = self
         tv.delegate = self
-        //        tv.register(ProductImageCell.self, forCellReuseIdentifier: String(describing: ProductImageCell.self))
-        //        tv.tableView.register(ProductTagCell.self, forCellReuseIdentifier: String(describing: ProductTagCell.self))
+        tv.register(ProductImageCell.self, forCellReuseIdentifier: String(describing: ProductImageCell.self))
+        tv.register(ProductTagCell.self, forCellReuseIdentifier: String(describing: ProductTagCell.self))
         //        tv.register(ProductDescriptionCell.self, forCellReuseIdentifier: String(describing: ProductDescriptionCell.self))
         return tv
     }()
-
+    
     
     // MARK:- Initialize
     
     init(navigator: Navigator) { // viewModel: ProductsControllerViewModel, navigator: Navigator, provider: NetworkManager
-//        self.viewModel = viewModel
-//        self.provider = provider
+        //        self.viewModel = viewModel
+        //        self.provider = provider
         self.navigate = navigator
         super.init()
     }
@@ -59,7 +59,7 @@ class ProductController: ViewController {
     }
     
     // MARK:- UI Method
-
+    
     override func setupUIComponents() {
         
         // transparent background
@@ -90,12 +90,26 @@ class ProductController: ViewController {
 }
 
 extension ProductController: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 1
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductImageCell.self), for: indexPath) as! ProductImageCell
+            return cell
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductTagCell.self), for: indexPath) as! ProductTagCell
+            return cell
+        case 2:
+            return UITableViewCell()
+        default:
+            return UITableViewCell()
+        }
+        
     }
     
     
@@ -103,4 +117,15 @@ extension ProductController: UITableViewDataSource {
 
 extension ProductController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            let height: CGFloat = self.view.frame.width
+            return height
+        case 1:
+            return UITableView.automaticDimension
+        default:
+            return 200
+        }
+    }
 }

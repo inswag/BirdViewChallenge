@@ -178,14 +178,14 @@ class ProductsController: ViewController {
         let textField = self.searchBar.value(forKey: "searchField") as! UITextField
         let glassIconView = textField.leftView as! UIImageView
         glassIconView.image = glassIconView.image?.withRenderingMode(.alwaysTemplate)
-        glassIconView.tintColor = UIColor.colorWithHexString(hexString: Tools.color.gray, alpha: 0.4)
+        glassIconView.tintColor = UIColor.colorWithHexString(hexString: Tools.color.lightBlack, alpha: 0.4)
         
         // - Accesss To UISearchBar Placeholder
         
-        textField.textColor = UIColor.colorWithHexString(hexString: Tools.color.gray, alpha: 0.4)
+        textField.textColor = UIColor.colorWithHexString(hexString: Tools.color.lightBlack, alpha: 0.4)
         
         let textFieldInsideSearchBarLabel = textField.value(forKey: "placeholderLabel") as! UILabel
-        textFieldInsideSearchBarLabel.textColor = UIColor.colorWithHexString(hexString: Tools.color.gray, alpha: 0.4)
+        textFieldInsideSearchBarLabel.textColor = UIColor.colorWithHexString(hexString: Tools.color.lightBlack, alpha: 0.4)
         self.searchBar.snp.makeConstraints { (m) in
             m.top.equalToSuperview()
             m.leading.bottom.equalToSuperview().offset(12)

@@ -15,14 +15,18 @@ struct Color {
         return "#9013FE"
     }
     
-    // Ref. Search Bar Tint Color
-    var gray: String {
+    // Ref. Product Name
+    var lightBlack: String {
         return "#141428"
     }
     
     // Ref. Product Price
     var darkGray: String {
         return "#ABABC4"
+    }
+    
+    var grayWhite: String {
+        return "#ECECF5"
     }
     
     // Ref. UIColor.black

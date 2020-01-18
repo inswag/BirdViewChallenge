@@ -31,7 +31,7 @@ class ProductsCell: CollectionViewCell {
         label.font = Tools.font.notoSansCJKkrBlack(size: 14)
         label.text = "ProductName\nProductName"
         label.numberOfLines = 2
-        label.textColor = UIColor.colorWithHexString(hexString: Tools.color.gray)
+        label.textColor = UIColor.colorWithHexString(hexString: Tools.color.lightBlack)
         return label
     }()
     

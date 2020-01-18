@@ -21,6 +21,11 @@ struct Font {
     }
     
     // Tools.font.appleSDGothicNeoBold(size: <#입력#>)
+    func appleSDGothicNeoHeavy(size: CGFloat) -> UIFont {
+        return UIFont.init(name: "AppleSDGothicNeo-Heavy", size: size) ?? UIFont.systemFont(ofSize: size)
+    }
+    
+    // Tools.font.appleSDGothicNeoBold(size: <#입력#>)
     func notoSansCJKkrBlack(size: CGFloat) -> UIFont {
         return UIFont.init(name: "NotoSansCJKkr-Black", size: size) ?? UIFont.systemFont(ofSize: size)
     }
@@ -30,4 +35,8 @@ struct Font {
         return UIFont.init(name: "NotoSansCJKkr-Bold", size: size) ?? UIFont.systemFont(ofSize: size)
     }
     
+    // Tools.font.sFProTextBlack(size: <#입력#>)
+    func sFProTextBlack(size: CGFloat) -> UIFont {
+        return UIFont.init(name: "SFProText-Black", size: size) ?? UIFont.systemFont(ofSize: size)
+    }
 }
