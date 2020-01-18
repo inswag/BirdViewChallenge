@@ -20,6 +20,10 @@ struct Color {
         return "#141428"
     }
     
+    var whiteAndBlack: String {
+        return "#A3A3B5"
+    }
+    
     // Ref. Product Price
     var darkGray: String {
         return "#ABABC4"
@@ -27,6 +31,11 @@ struct Color {
     
     var grayWhite: String {
         return "#ECECF5"
+    }
+    
+    // Ref. product description
+    var lightWhite: String {
+        return "#F6F6FA"
     }
     
     // Ref. UIColor.black

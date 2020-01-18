@@ -34,7 +34,7 @@ class ProductController: ViewController {
         tv.delegate = self
         tv.register(ProductImageCell.self, forCellReuseIdentifier: String(describing: ProductImageCell.self))
         tv.register(ProductTagCell.self, forCellReuseIdentifier: String(describing: ProductTagCell.self))
-        //        tv.register(ProductDescriptionCell.self, forCellReuseIdentifier: String(describing: ProductDescriptionCell.self))
+        tv.register(ProductDescriptionCell.self, forCellReuseIdentifier: String(describing: ProductDescriptionCell.self))
         return tv
     }()
     
@@ -69,8 +69,8 @@ class ProductController: ViewController {
         // UI Layouts
         [borderView, tableView].forEach { self.view.addSubview($0) }
         
-        self.borderView.snp.makeConstraints { (m) in
-            m.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
+        borderView.snp.makeConstraints { (m) in
+            m.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             m.width.equalTo(80)
             m.height.equalTo(6)
             m.centerX.equalToSuperview()
@@ -80,8 +80,6 @@ class ProductController: ViewController {
             m.top.equalTo(borderView.snp.bottom).offset(8)
             m.leading.trailing.bottom.equalToSuperview()
         }
-        
-        
         
     }
     
@@ -105,7 +103,8 @@ extension ProductController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductTagCell.self), for: indexPath) as! ProductTagCell
             return cell
         case 2:
-            return UITableViewCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductDescriptionCell.self), for: indexPath) as! ProductDescriptionCell
+            return cell
         default:
             return UITableViewCell()
         }
@@ -122,7 +121,7 @@ extension ProductController: UITableViewDelegate {
         case 0:
             let height: CGFloat = self.view.frame.width
             return height
-        case 1:
+        case 1, 2:
             return UITableView.automaticDimension
         default:
             return 200
