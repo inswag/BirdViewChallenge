@@ -25,9 +25,9 @@ struct Product: Decodable {
     let title: String               // 상품명
     let description: String         // 상품 설명
     let price: String               // 상품 가격
-    let oilyScore: Int              // 지성 성분 점수
-    let dryScore: Int               // 건성 성분 점수
-    let sensitiveScore: Int         // 민감성 성분 점수
+    let oilyScore: Int?              // 지성 성분 점수
+    let dryScore: Int?               // 건성 성분 점수
+    let sensitiveScore: Int?         // 민감성 성분 점수
     
     enum CodingKeys: String, CodingKey {
         case fullSizeImage = "full_size_image"

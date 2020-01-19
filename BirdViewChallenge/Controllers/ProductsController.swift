@@ -16,9 +16,7 @@ class ProductsController: ViewController {
     let navigate: Navigator
     let viewModel: ProductsControllerViewModel
     
-    
-    // Network Property
-    let provider: NetworkManager
+
 //    var page: Int = 2
     
     
@@ -102,9 +100,8 @@ class ProductsController: ViewController {
     
     // MARK:- Initialize
     
-    init(viewModel: ProductsControllerViewModel, navigator: Navigator, provider: NetworkManager) {
+    init(viewModel: ProductsControllerViewModel, navigator: Navigator) {
         self.viewModel = viewModel
-        self.provider = provider
         self.navigate = navigator
         super.init()
     }
@@ -272,7 +269,7 @@ extension ProductsController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.present(navigate.get(segue: .product), animated: true, completion: nil)
+//        self.present(navigate.get(segue: .product(viewModel: <#T##ProductControllerViewModel#>, provider: <#T##NetworkManager#>)), animated: true, completion: nil)
     }
     
 }

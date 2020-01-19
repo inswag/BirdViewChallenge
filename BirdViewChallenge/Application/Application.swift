@@ -23,8 +23,7 @@ final class Application: NSObject {
     
     func presentInitialScreen(in window: UIWindow) {
         self.window = window
-        let productsControllerViewModel = ProductsControllerViewModel()
-        let provider = NetworkManager()
-        window.rootViewController = self.navigator.get(segue: .products(viewModel: productsControllerViewModel, provider: provider))
+        
+        window.rootViewController = self.navigator.get(segue: .products)
     }
 }

@@ -15,7 +15,7 @@ class ProductTagCell: UITableViewCell {
     
     let productNameTitle: UILabel = {
         let label = UILabel()
-        label.font = Tools.font.appleSDGothicNeoHeavy(size: 32.0)
+        label.font = Tools.font.appleSDGothicNeoBold(size: 32.0)
         label.text = "ProductName\nProductName\nProductName"
         label.numberOfLines = 0
         label.textColor = UIColor.colorWithHexString(hexString: Tools.color.lightBlack)

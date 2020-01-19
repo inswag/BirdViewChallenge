@@ -20,6 +20,7 @@ struct Color {
         return "#141428"
     }
     
+    // Ref. 부랑구마켓 Background
     var whiteAndBlack: String {
         return "#A3A3B5"
     }
@@ -29,6 +30,7 @@ struct Color {
         return "#ABABC4"
     }
     
+    // Ref. Border View
     var grayWhite: String {
         return "#ECECF5"
     }

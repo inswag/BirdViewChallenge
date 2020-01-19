@@ -14,6 +14,7 @@ class ProductController: ViewController {
     // MARK:- Properties
     
     let navigate: Navigator
+    let viewModel: ProductControllerViewModel
     
     // MARK:- UI Properties
     
@@ -38,12 +39,24 @@ class ProductController: ViewController {
         return tv
     }()
     
+    lazy var closeButton: UIButton = {
+        let btn = UIButton()
+        let btnImg = UIImage(named: "close_white")
+        btn.setImage(btnImg, for: .normal)
+        btn.backgroundColor = UIColor.rgb(r: 24, g: 24, b: 40, a: 0.16)
+        btn.addTarget(self, action: #selector(actionClose), for: .touchUpInside)
+        btn.layer.cornerRadius = 20
+        return btn
+    }()
+    
+    @objc func actionClose() {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     // MARK:- Initialize
     
-    init(navigator: Navigator) { // viewModel: ProductsControllerViewModel, navigator: Navigator, provider: NetworkManager
-        //        self.viewModel = viewModel
-        //        self.provider = provider
+    init(viewModel: ProductControllerViewModel, navigator: Navigator) { // viewModel: ProductsControllerViewModel, navigator: Navigator, provider: NetworkManager
+        self.viewModel = viewModel
         self.navigate = navigator
         super.init()
     }
@@ -67,7 +80,7 @@ class ProductController: ViewController {
         self.view.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
         
         // UI Layouts
-        [borderView, tableView].forEach { self.view.addSubview($0) }
+        [borderView, tableView, closeButton].forEach { self.view.addSubview($0) }
         
         borderView.snp.makeConstraints { (m) in
             m.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -79,6 +92,13 @@ class ProductController: ViewController {
         tableView.snp.makeConstraints { (m) in
             m.top.equalTo(borderView.snp.bottom).offset(8)
             m.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        closeButton.snp.makeConstraints { (m) in
+            m.top.equalTo(tableView.snp.top).offset(16)
+            m.trailing.equalTo(tableView.snp.trailing).offset(-16)
+            m.width.equalTo(40)
+            m.height.equalTo(40)
         }
         
     }

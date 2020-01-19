@@ -12,7 +12,7 @@ final class ProductsControllerViewModel {
     
     // MARK:- Properties
     
-    let provider = NetworkManager()
+    let provider: NetworkManager
     var fetchedProducts: [Products] = []
     
     
@@ -28,7 +28,8 @@ final class ProductsControllerViewModel {
     
     // MARK:- Initialize
     
-    init() {
+    init(provider: NetworkManager) {
+        self.provider = provider
     }
     
     // MARK:- Data Source

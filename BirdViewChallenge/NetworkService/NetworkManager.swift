@@ -54,7 +54,21 @@ struct NetworkManager: Networkable {
         }
     }
     
-    
+    func fetchProductSelected(id: Int, completion: @escaping (ProductRoot) -> ()) {
+        provider.request(.productSelected(id: id)) { (result) in
+            switch result {
+            case let .success(response):
+                do {
+                    let results = try JSONDecoder().decode(ProductRoot.self, from: response.data)
+                    completion(results)
+                } catch let err {
+                    print(err)
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
     
     
 }
