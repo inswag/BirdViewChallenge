@@ -7,8 +7,19 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProductImageCell: UITableViewCell {
+    
+    // MARK:- Properties
+    
+    var viewModel: ProductCellViewModel! {
+      didSet {
+        guard let imageURL = URL(string: viewModel.fullSizeImage) else { return }
+        print("\(imageURL)")
+        productImage.kf.setImage(with: imageURL)
+      }
+    }
     
     // MARK:- UI Properties
     

@@ -10,7 +10,7 @@ import Foundation
 
 struct ProductRoot: Decodable {
     
-    let body: [Product]
+    let body: Product
     
     enum CodingKeys: String, CodingKey {
         case body

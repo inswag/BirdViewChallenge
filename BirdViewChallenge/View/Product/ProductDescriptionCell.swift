@@ -11,12 +11,21 @@ import SnapKit
 
 class ProductDescriptionCell: UITableViewCell {
     
+    // MARK:- Properties
+    
+    var viewModel: ProductCellViewModel! {
+        didSet {
+            productDescriptionTitle.text = viewModel.description
+        }
+    }
+    
+    
     // MARK:- UI Properties
     
     let productDescriptionTitle: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "NotoSansCJKkr-Bold", size: 16.0)
-        label.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pretium quam vel libero lobortis tempus. Curabitur sagittis, justo congue pellentesque iaculis, elit nibh dapibus tortor, vulputate bibendum enim dolor vel quam. Mauris accumsan, magna vel tincidunt tristique, justo felis porttitor nulla, id congue eros nisi at augue. Aliquam sollicitudin risus ut varius consectetur. Donec non quam luctus, consequat tortor ornare, rutrum velit. Sed molestie porta ornare. Nam tempor nisi a mi blandit, eu luctus nulla ultrices. Aliquam in turpis odio. Etiam in eros dolor. Aenean sit amet risus nec sapien finibus ornare a porta dolor. Praesent rhoncus nulla in mattis vehicula. \n\n Nunc accumsan nisl ac metus blandit tincidunt. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris ultricies consequat pulvinar. Sed condimentum mi nec justo aliquet, eget rhoncus dolor volutpat. Curabitur tincidunt cursus dolor. Ut metus risus, porttitor eget accumsan in, porta ac mauris. Curabitur fermentum diam ac mollis placerat. Quisque diam ante, congue sed semper interdum, volutpat ac mauris. Morbi tristique porta mauris eget iaculis. \n\n Donec nec mi fermentum, condimentum magna ut, luctus elit. Nam eu dolor ut augue condimentum lacinia ac at lacus. Aliquam consequat ligula felis. Praesent vel sollicitudin velit. Nulla ac purus malesuada, finibus augue vitae, aliquam neque. Cras eu blandit ex, vitae dapibus tellus. Aliquam posuere arcu a enim malesuada lobortis. Sed eros lacus, maximus et magna sit amet, consequat feugiat dolor. Nullam massa nibh, sollicitudin nec eros non, aliquet dictum neque. Aenean accumsan posuere nisl vitae congue."
+        label.text = "Description"
         label.numberOfLines = 0
         label.textColor = UIColor.rgb(r: 20, g: 20, b: 40)
         return label

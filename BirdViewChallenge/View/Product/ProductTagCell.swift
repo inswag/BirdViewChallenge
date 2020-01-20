@@ -11,6 +11,25 @@ import SnapKit
 
 class ProductTagCell: UITableViewCell {
     
+    // MARK:- Properties
+    
+    var viewModel: ProductCellViewModel! {
+      didSet {
+        // Product
+        productNameTitle.text = viewModel.title
+        
+        // Price
+        let price = Tools.numberFormatter(stringNumber: viewModel.price)
+        let attributedTitle = NSMutableAttributedString(string: price,
+                                                        attributes: [NSAttributedString.Key.font: Tools.font.sFProTextBlack(size: 20.0),
+                                                                     NSAttributedString.Key.foregroundColor: UIColor.colorWithHexString(hexString: Tools.color.violet)])
+        attributedTitle.append(NSAttributedString(string: "원",
+                                                  attributes: [NSAttributedString.Key.font: Tools.font.appleSDGothicNeoBold(size: 20.0),
+                                                               NSAttributedString.Key.foregroundColor: UIColor.colorWithHexString(hexString: Tools.color.violet)]))
+        priceNameTitle.attributedText = attributedTitle
+      }
+    }
+    
     // MARK:- UI Properties
     
     let productNameTitle: UILabel = {
@@ -24,12 +43,6 @@ class ProductTagCell: UITableViewCell {
     
     let priceNameTitle: UILabel = {
         let label = UILabel()
-        let attributedTitle = NSMutableAttributedString(string: "177,300",
-                                                        attributes: [NSAttributedString.Key.font: Tools.font.sFProTextBlack(size: 20.0), NSAttributedString.Key.foregroundColor: UIColor.colorWithHexString(hexString: Tools.color.violet)])
-        attributedTitle.append(NSAttributedString(string: "원",
-                                                  attributes: [NSAttributedString.Key.font: Tools.font.appleSDGothicNeoBold(size: 20.0),
-                                                               NSAttributedString.Key.foregroundColor: UIColor.colorWithHexString(hexString: Tools.color.violet)]))
-        label.attributedText = attributedTitle
         label.textAlignment = .left
         return label
     }()

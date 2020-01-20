@@ -13,19 +13,8 @@ final class ProductControllerViewModel {
     // MARK:- Properties
     
     let provider: NetworkManager
-    var fetchedProduct: [Product] = []
+    var fetchedProduct: Product?
     var id: Int
-    
-    
-    // PickerView Property
-    let typeArray = ["모든 피부 타입", "지성", "건성", "민감성"]
-    
-    enum Types: Int {
-        case `default`
-        case oily
-        case dry
-        case sensitive
-    }
     
     // MARK:- Initialize
     
@@ -34,15 +23,17 @@ final class ProductControllerViewModel {
         self.id = id
     }
     
-    // MARK:- Data Source
+    // MARK:-
     
-    func numberOfSections() -> Int {
-        return 1
-    }
     
-    func numberOfItemsInSection() -> Int {
-        return self.fetchedProduct.count
-    }
     
     // MARK:- Methods
+    
+    func fetchProductSelected(id: Int, completion: @escaping () -> ()) {
+        provider.fetchProductSelected(id: id) { (response) in
+            self.fetchedProduct = response.body
+            completion()
+        }
+    }
+    
 }

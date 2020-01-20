@@ -15,6 +15,8 @@
 		F918071323D2F70A0059DEEA /* ProductDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918071223D2F70A0059DEEA /* ProductDescriptionCell.swift */; };
 		F918071523D2F9BF0059DEEA /* SFProText-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F918071423D2F9BF0059DEEA /* SFProText-Black.otf */; };
 		F918071723D43F310059DEEA /* ProductControllerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918071623D43F310059DEEA /* ProductControllerViewModel.swift */; };
+		F918071A23D4A2C40059DEEA /* ProductCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918071923D4A2C40059DEEA /* ProductCellViewModel.swift */; };
+		F928C99D23D5E8FD0049292B /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F928C99C23D5E8FD0049292B /* NumberFormatter.swift */; };
 		F92C268C23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F92C268B23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf */; };
 		F92C268E23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F92C268D23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf */; };
 		F940CABF23CECA7E0018927C /* BirdViewApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940CABE23CECA7E0018927C /* BirdViewApi.swift */; };
@@ -39,8 +41,6 @@
 		F960B47623C5ABF400F488F8 /* ProductsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960B47523C5ABF400F488F8 /* ProductsCellViewModel.swift */; };
 		F960B47E23C7010900F488F8 /* ProductsFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960B47D23C7010900F488F8 /* ProductsFooter.swift */; };
 		F960B48123C8494400F488F8 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960B48023C8494400F488F8 /* API.swift */; };
-		F960B48323C849B400F488F8 /* ProductsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960B48223C849B400F488F8 /* ProductsService.swift */; };
-		F960B48523C849C000F488F8 /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960B48423C849C000F488F8 /* ProductService.swift */; };
 		F960B48823C84F9600F488F8 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960B48723C84F9600F488F8 /* Products.swift */; };
 		F960B48A23C84FA200F488F8 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F960B48923C84FA200F488F8 /* Product.swift */; };
 		FD948157A1E5BDAEAE336AFF /* Pods_BirdViewChallenge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0F3CF681C11660BC0124203 /* Pods_BirdViewChallenge.framework */; };
@@ -78,6 +78,8 @@
 		F918071223D2F70A0059DEEA /* ProductDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionCell.swift; sourceTree = "<group>"; };
 		F918071423D2F9BF0059DEEA /* SFProText-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Black.otf"; sourceTree = "<group>"; };
 		F918071623D43F310059DEEA /* ProductControllerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductControllerViewModel.swift; sourceTree = "<group>"; };
+		F918071923D4A2C40059DEEA /* ProductCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellViewModel.swift; sourceTree = "<group>"; };
+		F928C99C23D5E8FD0049292B /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		F92C268B23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Black.otf"; sourceTree = "<group>"; };
 		F92C268D23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Bold.otf"; sourceTree = "<group>"; };
 		F940CABE23CECA7E0018927C /* BirdViewApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewApi.swift; sourceTree = "<group>"; };
@@ -108,8 +110,6 @@
 		F960B47523C5ABF400F488F8 /* ProductsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsCellViewModel.swift; sourceTree = "<group>"; };
 		F960B47D23C7010900F488F8 /* ProductsFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsFooter.swift; sourceTree = "<group>"; };
 		F960B48023C8494400F488F8 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		F960B48223C849B400F488F8 /* ProductsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsService.swift; sourceTree = "<group>"; };
-		F960B48423C849C000F488F8 /* ProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductService.swift; sourceTree = "<group>"; };
 		F960B48723C84F9600F488F8 /* Products.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		F960B48923C84FA200F488F8 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FACE9E0691148D3274BC1901 /* Pods-BirdViewChallenge.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirdViewChallenge.release.xcconfig"; path = "Target Support Files/Pods-BirdViewChallenge/Pods-BirdViewChallenge.release.xcconfig"; sourceTree = "<group>"; };
@@ -289,6 +289,7 @@
 				F95E62FF23C3091F008F7805 /* Color.swift */,
 				F95E630123C30928008F7805 /* Font.swift */,
 				F95E630523C30999008F7805 /* Anchor.swift */,
+				F928C99C23D5E8FD0049292B /* NumberFormatter.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -308,6 +309,7 @@
 			children = (
 				F918071823D43F360059DEEA /* Products */,
 				F918071623D43F310059DEEA /* ProductControllerViewModel.swift */,
+				F918071923D4A2C40059DEEA /* ProductCellViewModel.swift */,
 			);
 			path = "Presentation(ViewModels)";
 			sourceTree = "<group>";
@@ -325,8 +327,6 @@
 			isa = PBXGroup;
 			children = (
 				F960B48023C8494400F488F8 /* API.swift */,
-				F960B48223C849B400F488F8 /* ProductsService.swift */,
-				F960B48423C849C000F488F8 /* ProductService.swift */,
 				F940CABE23CECA7E0018927C /* BirdViewApi.swift */,
 				F940CAC023CEEAEE0018927C /* NetworkManager.swift */,
 			);
@@ -585,13 +585,13 @@
 			files = (
 				F95E62F723C30751008F7805 /* Application.swift in Sources */,
 				F960B47E23C7010900F488F8 /* ProductsFooter.swift in Sources */,
+				F918071A23D4A2C40059DEEA /* ProductCellViewModel.swift in Sources */,
 				F95E62FA23C307AA008F7805 /* Navigator.swift in Sources */,
 				F918071723D43F310059DEEA /* ProductControllerViewModel.swift in Sources */,
 				F940CABF23CECA7E0018927C /* BirdViewApi.swift in Sources */,
 				F918071323D2F70A0059DEEA /* ProductDescriptionCell.swift in Sources */,
 				F940CAC123CEEAEE0018927C /* NetworkManager.swift in Sources */,
 				F918070F23D2EE780059DEEA /* ProductImageCell.swift in Sources */,
-				F960B48523C849C000F488F8 /* ProductService.swift in Sources */,
 				F95E630223C30928008F7805 /* Font.swift in Sources */,
 				F960B47123C597BD00F488F8 /* ProductsControllerViewModel.swift in Sources */,
 				F95E62CB23C2D4A8008F7805 /* ProductsController.swift in Sources */,
@@ -599,6 +599,7 @@
 				F95E62C723C2D4A8008F7805 /* AppDelegate.swift in Sources */,
 				F95E630023C3091F008F7805 /* Color.swift in Sources */,
 				F960B47423C5ABE000F488F8 /* ProductsCell.swift in Sources */,
+				F928C99D23D5E8FD0049292B /* NumberFormatter.swift in Sources */,
 				F95E631123C3183C008F7805 /* CollectionViewCell.swift in Sources */,
 				F918071123D2F6EA0059DEEA /* ProductTagCell.swift in Sources */,
 				F95E630923C30AA9008F7805 /* NavigationController.swift in Sources */,
@@ -608,7 +609,6 @@
 				F960B48123C8494400F488F8 /* API.swift in Sources */,
 				F960B48823C84F9600F488F8 /* Products.swift in Sources */,
 				F960B47623C5ABF400F488F8 /* ProductsCellViewModel.swift in Sources */,
-				F960B48323C849B400F488F8 /* ProductsService.swift in Sources */,
 				F960B48A23C84FA200F488F8 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

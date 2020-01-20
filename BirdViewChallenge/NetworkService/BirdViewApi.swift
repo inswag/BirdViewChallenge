@@ -29,7 +29,12 @@ extension BirdViewApi: TargetType {
     
     // 2
     public var path: String {
-        return "/products"
+        switch self {
+        case .productSelected(let id):
+            return "/products/\(id)"
+        default:
+            return "/products"
+        }
     }
     
     // 3
@@ -55,8 +60,8 @@ extension BirdViewApi: TargetType {
             return .requestParameters(parameters: ["skin_type": type, "page": page], encoding: URLEncoding.queryString)
         case .productsBySearch(let type, let keyword):
             return .requestParameters(parameters: ["skin_type": type, "keyword": keyword], encoding: URLEncoding.queryString)
-        case .productSelected(let id):
-            return .requestParameters(parameters: ["id": id], encoding: URLEncoding.queryString)
+        case .productSelected:
+            return .requestPlain
         }
     }
     

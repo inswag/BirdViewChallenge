@@ -69,6 +69,7 @@ class ProductController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.fetchProductSelected()
     }
     
     // MARK:- UI Method
@@ -103,7 +104,14 @@ class ProductController: ViewController {
         
     }
     
+    // MARK:- Network Method
     
+    func fetchProductSelected() {
+        let id = viewModel.id
+        viewModel.fetchProductSelected(id: id) {
+            self.tableView.reloadData()
+        }
+    }
     
 }
 
@@ -115,15 +123,20 @@ extension ProductController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        guard let rowData = viewModel.fetchedProduct else { return UITableViewCell() }
+        
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductImageCell.self), for: indexPath) as! ProductImageCell
+            cell.viewModel = ProductCellViewModel(content: rowData)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductTagCell.self), for: indexPath) as! ProductTagCell
+            cell.viewModel = ProductCellViewModel(content: rowData)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductDescriptionCell.self), for: indexPath) as! ProductDescriptionCell
+            cell.viewModel = ProductCellViewModel(content: rowData)
             return cell
         default:
             return UITableViewCell()

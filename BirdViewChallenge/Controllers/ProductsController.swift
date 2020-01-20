@@ -16,10 +16,6 @@ class ProductsController: ViewController {
     let navigate: Navigator
     let viewModel: ProductsControllerViewModel
     
-
-//    var page: Int = 2
-    
-    
     // MARK: - UI Properties
     
     lazy var collectionView: UICollectionView = {
@@ -269,7 +265,9 @@ extension ProductsController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        self.present(navigate.get(segue: .product(viewModel: <#T##ProductControllerViewModel#>, provider: <#T##NetworkManager#>)), animated: true, completion: nil)
+        let id = viewModel.fetchedProducts[indexPath.item].id
+        let productVC = navigate.get(segue: .product(id: id))
+        self.present(productVC, animated: true)
     }
     
 }
@@ -329,7 +327,6 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         switch ProductsControllerViewModel.Types(rawValue: row) {
         case .`default`:
             viewModel.fetchAllTypeProducts { self.collectionView.reloadData() }

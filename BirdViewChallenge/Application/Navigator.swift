@@ -31,8 +31,6 @@ class Navigator {
             let productVC = ProductController(viewModel: viewModel, navigator: self)
             productVC.modalPresentationStyle = .overCurrentContext
             return productVC
-
         }
-        
     }
 }
