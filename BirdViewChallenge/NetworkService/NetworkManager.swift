@@ -38,7 +38,7 @@ struct NetworkManager: Networkable {
         }
     }
     
-    func fetchProductsByType(skinType: String, page: Int, completion: @escaping (ProductsRoot) -> ()) {
+    func fetchProducts(by skinType: String, page: Int, completion: @escaping (ProductsRoot) -> ()) {
         provider.request(.productsByType(type: skinType, page: page)) { (result) in
             switch result {
             case let .success(response):

@@ -18,7 +18,16 @@ class ProductsCell: CollectionViewCell {
         let imageURL = URL(string: viewModel.thumbnail)
         photoImageView.kf.setImage(with: imageURL)
         productNameTitle.text = viewModel.title
-        priceNameTitle.text = viewModel.price
+        
+        // Price
+        let price = Tools.numberFormatter(stringNumber: viewModel.price)
+        let attributedTitle = NSMutableAttributedString(string: price,
+                                                        attributes: [NSAttributedString.Key.font: Tools.font.notoSansCJKkrBold(size: 14),
+                                                                     NSAttributedString.Key.foregroundColor: UIColor.colorWithHexString(hexString: Tools.color.darkGray)])
+        attributedTitle.append(NSAttributedString(string: "원",
+                                                  attributes: [NSAttributedString.Key.font: Tools.font.appleSDGothicNeoBold(size: 14.0),
+                                                               NSAttributedString.Key.foregroundColor: UIColor.colorWithHexString(hexString: Tools.color.darkGray)]))
+        priceNameTitle.attributedText = attributedTitle
       }
     }
     
@@ -49,10 +58,10 @@ class ProductsCell: CollectionViewCell {
     
     let priceNameTitle: UILabel = {
         let label = UILabel()
-        label.font = Tools.font.notoSansCJKkrBold(size: 14)
-        label.text = "price"
+//        label.font = Tools.font.notoSansCJKkrBold(size: 14)
+//        label.text = "price"
         label.numberOfLines = 1
-        label.textColor = UIColor.colorWithHexString(hexString: Tools.color.darkGray)
+//        label.textColor = UIColor.colorWithHexString(hexString: Tools.color.darkGray)
         return label
     }()
     

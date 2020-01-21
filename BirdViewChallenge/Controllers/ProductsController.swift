@@ -15,6 +15,7 @@ class ProductsController: ViewController {
     
     let navigate: Navigator
     let viewModel: ProductsControllerViewModel
+    var skinType: String = ""
     
     // MARK: - UI Properties
     
@@ -256,12 +257,9 @@ extension ProductsController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        if indexPath.row == viewModel.fetchedProducts.count - 1 {
-//            if typeName.text != "모든 피부 타입" {
-//                viewModel.paginateProducts(skinType: "sensitive")
-//            }
-//            
-//        }
+        viewModel.fetchMoreProducts(skinType: self.skinType, indexPath: indexPath) {
+            self.collectionView.reloadData()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -327,15 +325,22 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        viewModel.fetchedProducts.removeAll()
+        
         switch ProductsControllerViewModel.Types(rawValue: row) {
         case .`default`:
             viewModel.fetchAllTypeProducts { self.collectionView.reloadData() }
         case .oily:
-            viewModel.fetchProductsByType(skinType: "oily") { self.collectionView.reloadData() }
+            viewModel.fetchProducts(by: "oily") {
+                self.skinType = "oily"
+                self.collectionView.reloadData()
+                
+            }
         case .dry:
-            viewModel.fetchProductsByType(skinType: "dry") { self.collectionView.reloadData() }
+            viewModel.fetchProducts(by: "dry") { self.collectionView.reloadData() }
         case .sensitive:
-            viewModel.fetchProductsByType(skinType: "sensitive") { self.collectionView.reloadData() }
+            viewModel.fetchProducts(by: "sensitive") { self.collectionView.reloadData() }
         default   :
             print("해당 없음")
         }
