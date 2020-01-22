@@ -57,9 +57,9 @@ extension BirdViewApi: TargetType {
         case .allType:
             return .requestPlain
         case .productsByType(let type, let page):
-            return .requestParameters(parameters: ["skin_type": type, "page": page], encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: ["skin_type": type, "page": page], encoding: URLEncoding.default)
         case .productsBySearch(let type, let keyword):
-            return .requestParameters(parameters: ["skin_type": type, "keyword": keyword], encoding: URLEncoding.queryString)
+            return .requestParameters(parameters: ["keyword": keyword, "skin_type": type], encoding: URLEncoding.queryString)
         case .productSelected:
             return .requestPlain
         }
@@ -67,8 +67,13 @@ extension BirdViewApi: TargetType {
     
     // 6
     public var headers: [String : String]? {
-        return ["Content-Type": "application/json"]
+        return [
+            "Content-Type": "application/json",
+            "token" : "46ea3a2703c54d1bc6ebbc366d0019f1"
+        ]
     }
+    
+    
     // 7
     public var validationType: ValidationType {
         return .successCodes

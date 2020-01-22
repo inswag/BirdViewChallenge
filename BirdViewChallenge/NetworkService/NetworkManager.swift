@@ -70,5 +70,21 @@ struct NetworkManager: Networkable {
         }
     }
     
+    func fetchProduct(by keyword: String, and skinType: String, completion: @escaping (ProductsRoot) -> ()) {
+        provider.request(.productsBySearch(type: skinType, keyword: keyword)) { (result) in
+            switch result {
+            case let .success(response):
+                do {
+                    let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
+                    completion(results)
+                } catch let err {
+                    print(err)
+                }
+            case let .failure(error):
+                print(error)
+            }
+        }
+    }
+    
     
 }

@@ -46,7 +46,7 @@ final class ProductsControllerViewModel {
     // MARK:- Methods
     
     func fetchAllTypeProducts(completion: @escaping () -> ()) {
-        provider.fetchAllTypeProducts { (response) in
+        provider.fetchAllTypeProducts { response in
             response.body.forEach { self.fetchedProducts.append($0) }
             completion()
         }
@@ -62,20 +62,22 @@ final class ProductsControllerViewModel {
     func fetchMoreProducts(skinType: String, indexPath: IndexPath, completion: @escaping () -> ()) {
         if indexPath.row == fetchedProducts.count - 1 {
             self.page += 1
+            print(self.page)
             provider.fetchProducts(by: skinType, page: page) { (response) in
                 response.body.forEach { self.fetchedProducts.append($0) }
                 completion()
             }
         }
-        //        print("will Paginate User List!")
-        //        print("pageNumber: ", page)
-        //        fetchProducts(since: page)
+    }
+    
+    func fetchProducts(by keyword: String, and skinType: String, completion: @escaping () -> ()) {
+        provider.fetchProduct(by: keyword, and: skinType) { (response) in
+            response.body.forEach {
+                self.fetchedProducts.append($0)
+                completion()
+            }
+        }
         
-//        provider.fetchProductsByType(skinType: skinType, page: page) { (response) in
-//            response.body.forEach { self.fetchedProducts.append($0) }
-//            self.page += 1
-//            print(self.page)
-//        }
     }
     
 }

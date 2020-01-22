@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		599B34E4C91C01A1E9064D18 /* Pods_BirdViewChallengeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6396DBFC63910A56CDAA107 /* Pods_BirdViewChallengeTests.framework */; };
 		5F7B26A0718DA283B07FD2B5 /* Pods_BirdViewChallenge_BirdViewChallengeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6FA1D6836C373C10CC908E7 /* Pods_BirdViewChallenge_BirdViewChallengeUITests.framework */; };
+		E699441B23D88C2D00F846CC /* BirdViewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E699441A23D88C2D00F846CC /* BirdViewResponse.swift */; };
 		F90574F523D196DA00B5BB0A /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90574F423D196DA00B5BB0A /* ProductController.swift */; };
 		F918070F23D2EE780059DEEA /* ProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918070E23D2EE780059DEEA /* ProductImageCell.swift */; };
 		F918071123D2F6EA0059DEEA /* ProductTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918071023D2F6EA0059DEEA /* ProductTagCell.swift */; };
@@ -71,6 +72,7 @@
 		B6FA1D6836C373C10CC908E7 /* Pods_BirdViewChallenge_BirdViewChallengeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BirdViewChallenge_BirdViewChallengeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA19B278A953E32C57F653CD /* Pods-BirdViewChallengeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirdViewChallengeTests.release.xcconfig"; path = "Target Support Files/Pods-BirdViewChallengeTests/Pods-BirdViewChallengeTests.release.xcconfig"; sourceTree = "<group>"; };
 		E5A095A92305C9C4DB02436D /* Pods-BirdViewChallenge-BirdViewChallengeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BirdViewChallenge-BirdViewChallengeUITests.release.xcconfig"; path = "Target Support Files/Pods-BirdViewChallenge-BirdViewChallengeUITests/Pods-BirdViewChallenge-BirdViewChallengeUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E699441A23D88C2D00F846CC /* BirdViewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewResponse.swift; sourceTree = "<group>"; };
 		F6396DBFC63910A56CDAA107 /* Pods_BirdViewChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BirdViewChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90574F423D196DA00B5BB0A /* ProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
 		F918070E23D2EE780059DEEA /* ProductImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCell.swift; sourceTree = "<group>"; };
@@ -327,8 +329,9 @@
 			isa = PBXGroup;
 			children = (
 				F960B48023C8494400F488F8 /* API.swift */,
-				F940CABE23CECA7E0018927C /* BirdViewApi.swift */,
 				F940CAC023CEEAEE0018927C /* NetworkManager.swift */,
+				F940CABE23CECA7E0018927C /* BirdViewApi.swift */,
+				E699441A23D88C2D00F846CC /* BirdViewResponse.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				F95E62C723C2D4A8008F7805 /* AppDelegate.swift in Sources */,
 				F95E630023C3091F008F7805 /* Color.swift in Sources */,
 				F960B47423C5ABE000F488F8 /* ProductsCell.swift in Sources */,
+				E699441B23D88C2D00F846CC /* BirdViewResponse.swift in Sources */,
 				F928C99D23D5E8FD0049292B /* NumberFormatter.swift in Sources */,
 				F95E631123C3183C008F7805 /* CollectionViewCell.swift in Sources */,
 				F918071123D2F6EA0059DEEA /* ProductTagCell.swift in Sources */,

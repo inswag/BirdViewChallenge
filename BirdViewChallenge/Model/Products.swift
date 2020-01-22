@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ProductsRoot: Decodable {
+struct ProductsRoot: Codable {
     
     let body: [Products]
     
@@ -18,7 +18,7 @@ struct ProductsRoot: Decodable {
     
 }
 
-struct Products: Decodable {
+struct Products: Codable {
     
     let id: Int
     let price: String
