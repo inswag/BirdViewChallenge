@@ -155,7 +155,12 @@ class ProductsController: ViewController {
             case .success(let response):
                 do {
                     
-                    self.state = .ready(response)
+//                    self.state = .ready(response)
+                    let data = response.data
+                    print(data)
+                    let statusCode = response.statusCode
+                    print(statusCode)
+                    
                     
                 } catch {
                     print("here")
