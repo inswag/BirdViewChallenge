@@ -18,7 +18,8 @@ class ProductsController: ViewController {
     let viewModel: ProductsControllerViewModel
     var skinType: String = "oily"
     
-    let provider = MoyaProvider<BirdViewApi>()
+//    let provide = NetworkManager
+    let provider = MoyaProvider<BirdViewService>()
     
     // MARK: - View State
     private var state: State = .loading {
@@ -146,22 +147,29 @@ class ProductsController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        
         state = .loading
         
         provider.request(.allType) { [weak self] result in
+            print("result: \(result)")
             guard let self = self else { return }
-            
+//
             switch result {
             case .success(let response):
                 do {
+                    print("response: \(response)")
+                    print("response.data: \(response.data)")
+                    print("response.mapJSON: \(try response.mapJSON())")
                     
-//                    self.state = .ready(response)
-                    let data = response.data
-                    print(data)
-                    let statusCode = response.statusCode
-                    print(statusCode)
-                    // GitTEST
                     
+////                    self.state = .ready(response)
+//                    let data = response.data
+//                    print(data)
+//                    let statusCode = response.statusCode
+//                    print(statusCode)
+//                    // GitTEST
+//
                 } catch {
                     print("here")
                     self.state = .error
@@ -251,9 +259,9 @@ class ProductsController: ViewController {
     // MARK:- Network Method
     
     fileprivate func fetchProductsAllType() {
-        viewModel.fetchAllTypeProducts { [weak self] in
-            self?.collectionView.reloadData()
-        }
+//        viewModel.fetchAllTypeProducts { [weak self] in
+//            self?.collectionView.reloadData()
+//        }
     }
     
     // MARK:- Hide/Show Header Method
@@ -311,9 +319,9 @@ extension ProductsController: UISearchBarDelegate {
         print("This is \(self.skinType)")
         guard let text = searchBar.text?.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return }
         print("Here is \(text)")
-        viewModel.fetchProducts(by: text, and: skinType) {
-            self.collectionView.reloadData()
-        }
+//        viewModel.fetchProducts(by: text, and: skinType) {
+//            self.collectionView.reloadData()
+//        }
         
         self.searchBar.resignFirstResponder()
     }
@@ -349,9 +357,9 @@ extension ProductsController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        viewModel.fetchMoreProducts(skinType: self.skinType, indexPath: indexPath) {
-            self.collectionView.reloadData()
-        }
+//        viewModel.fetchMoreProducts(skinType: self.skinType, indexPath: indexPath) {
+//            self.collectionView.reloadData()
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -417,46 +425,46 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        viewModel.fetchedProducts.removeAll()
-        viewModel.page = 1
-        
-        switch ProductsControllerViewModel.Types(rawValue: row) {
-        case .`default`:
-            viewModel.fetchAllTypeProducts {
-                self.skinType = ""
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-            }
-        case .oily:
-            self.skinType = "oily"
-            viewModel.fetchProducts(by: "oily") {
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-            }
-        case .dry:
-            self.skinType = "dry"
-            viewModel.fetchProducts(by: "dry") {
-                
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-
-            }
-        case .sensitive:
-            self.skinType = "sensitive"
-            viewModel.fetchProducts(by: "sensitive") {
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-            }
-        default   :
-            print("해당 없음")
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.typeName.text = self.viewModel.typeArray[row]
-            self.pickerContainer.resignFirstResponder()
-        }
-        
+//
+//        viewModel.fetchedProducts.removeAll()
+//        viewModel.page = 1
+//
+//        switch ProductsControllerViewModel.Types(rawValue: row) {
+//        case .`default`:
+//            viewModel.fetchAllTypeProducts {
+//                self.skinType = ""
+//                self.collectionView.reloadData()
+//                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+//            }
+//        case .oily:
+//            self.skinType = "oily"
+//            viewModel.fetchProducts(by: "oily") {
+//                self.collectionView.reloadData()
+//                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+//            }
+//        case .dry:
+//            self.skinType = "dry"
+//            viewModel.fetchProducts(by: "dry") {
+//
+//                self.collectionView.reloadData()
+//                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+//
+//            }
+//        case .sensitive:
+//            self.skinType = "sensitive"
+//            viewModel.fetchProducts(by: "sensitive") {
+//                self.collectionView.reloadData()
+//                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+//            }
+//        default   :
+//            print("해당 없음")
+//        }
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//            self.typeName.text = self.viewModel.typeArray[row]
+//            self.pickerContainer.resignFirstResponder()
+//        }
+//
     }
 
 

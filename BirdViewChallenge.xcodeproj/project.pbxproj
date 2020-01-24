@@ -20,7 +20,7 @@
 		F928C99D23D5E8FD0049292B /* NumberFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F928C99C23D5E8FD0049292B /* NumberFormatter.swift */; };
 		F92C268C23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F92C268B23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf */; };
 		F92C268E23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F92C268D23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf */; };
-		F940CABF23CECA7E0018927C /* BirdViewApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940CABE23CECA7E0018927C /* BirdViewApi.swift */; };
+		F940CABF23CECA7E0018927C /* BirdViewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940CABE23CECA7E0018927C /* BirdViewService.swift */; };
 		F940CAC123CEEAEE0018927C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F940CAC023CEEAEE0018927C /* NetworkManager.swift */; };
 		F95E62C723C2D4A8008F7805 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E62C623C2D4A8008F7805 /* AppDelegate.swift */; };
 		F95E62CB23C2D4A8008F7805 /* ProductsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E62CA23C2D4A8008F7805 /* ProductsController.swift */; };
@@ -84,7 +84,7 @@
 		F928C99C23D5E8FD0049292B /* NumberFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormatter.swift; sourceTree = "<group>"; };
 		F92C268B23C9F88B00A7E119 /* NotoSansCJKkr-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Black.otf"; sourceTree = "<group>"; };
 		F92C268D23C9F89700A7E119 /* NotoSansCJKkr-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansCJKkr-Bold.otf"; sourceTree = "<group>"; };
-		F940CABE23CECA7E0018927C /* BirdViewApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewApi.swift; sourceTree = "<group>"; };
+		F940CABE23CECA7E0018927C /* BirdViewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewService.swift; sourceTree = "<group>"; };
 		F940CAC023CEEAEE0018927C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F95E62C323C2D4A8008F7805 /* BirdViewChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BirdViewChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F95E62C623C2D4A8008F7805 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -330,7 +330,7 @@
 			children = (
 				F960B48023C8494400F488F8 /* API.swift */,
 				F940CAC023CEEAEE0018927C /* NetworkManager.swift */,
-				F940CABE23CECA7E0018927C /* BirdViewApi.swift */,
+				F940CABE23CECA7E0018927C /* BirdViewService.swift */,
 				E699441A23D88C2D00F846CC /* BirdViewResponse.swift */,
 			);
 			path = NetworkService;
@@ -591,7 +591,7 @@
 				F918071A23D4A2C40059DEEA /* ProductCellViewModel.swift in Sources */,
 				F95E62FA23C307AA008F7805 /* Navigator.swift in Sources */,
 				F918071723D43F310059DEEA /* ProductControllerViewModel.swift in Sources */,
-				F940CABF23CECA7E0018927C /* BirdViewApi.swift in Sources */,
+				F940CABF23CECA7E0018927C /* BirdViewService.swift in Sources */,
 				F918071323D2F70A0059DEEA /* ProductDescriptionCell.swift in Sources */,
 				F940CAC123CEEAEE0018927C /* NetworkManager.swift in Sources */,
 				F918070F23D2EE780059DEEA /* ProductImageCell.swift in Sources */,

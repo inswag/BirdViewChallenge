@@ -8,7 +8,7 @@
 
 import Moya
 
-public enum BirdViewApi {
+public enum BirdViewService {
     
     // Products
     case allType
@@ -20,7 +20,8 @@ public enum BirdViewApi {
     
 }
 
-extension BirdViewApi: TargetType {
+// MARK: - TargetType Protocol Implementation
+extension BirdViewService: TargetType {
     
     // 1
     public var baseURL: URL {
@@ -46,21 +47,28 @@ extension BirdViewApi: TargetType {
         }
     }
     
-    // 4
+    // 4 : Use for Unit Test
     public var sampleData: Data {
-        return Data()
-    }
-    
-    // 5 - Parameter 에 대한 처리가 들어가야함.
-    public var task: Task {
         switch self {
         case .allType:
+            return Data()
+//            return "It's time to go".utf8Encoded
+        default:
+            return Data()
+        }
+//        return Data()
+    }
+    
+    // 5 - Parameter 에 대한 처리가 들어간다.
+    public var task: Task {
+        switch self {
+        case .allType: // Send no parameters
             return .requestPlain
-        case .productsByType(let type, let page):
-            return .requestParameters(parameters: ["skin_type": type, "page": page], encoding: URLEncoding.default)
-        case .productsBySearch(let type, let keyword):
+        case let .productsByType(type, page): // Always sends parameters in URL, regardless of which HTTP method is used
+            return .requestParameters(parameters: ["skin_type": type, "page": page], encoding: URLEncoding.queryString)
+        case let .productsBySearch(type, keyword): // Always send parameters as JSON in request body
             return .requestParameters(parameters: ["keyword": keyword, "skin_type": type], encoding: URLEncoding.queryString)
-        case .productSelected:
+        case .productSelected: // Send no parameters
             return .requestPlain
         }
     }
@@ -82,7 +90,7 @@ extension BirdViewApi: TargetType {
     
 }
 
-// just for convenience
+// Just for convenience
 private extension String {
     var urlEscaped: String {
         return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!

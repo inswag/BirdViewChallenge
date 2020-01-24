@@ -10,7 +10,7 @@ import Moya
 
 protocol Networkable {
     
-    var provider: MoyaProvider<BirdViewApi> { get }
+    var provider: MoyaProvider<BirdViewService> { get }
     
     func fetchAllTypeProducts(completion: @escaping (ProductsRoot) -> ())
     
@@ -20,7 +20,7 @@ protocol Networkable {
 struct NetworkManager: Networkable {
     
     // keep our provider private as we do not want anyone outside of this file to access the provider directly
-    internal let provider = MoyaProvider<BirdViewApi>(plugins: [NetworkLoggerPlugin(verbose: true)])
+    internal let provider = MoyaProvider<BirdViewService>(plugins: [NetworkLoggerPlugin(verbose: true)])
     
     func fetchAllTypeProducts(completion: @escaping (ProductsRoot) -> ()) {
         provider.request(.allType) { result in
