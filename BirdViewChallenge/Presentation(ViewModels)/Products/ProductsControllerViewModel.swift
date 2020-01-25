@@ -13,10 +13,9 @@ final class ProductsControllerViewModel {
     
     // MARK:- Properties
     
-    let provider: NetworkManager
     var fetchedProducts: [Products] = []
     var page: Int = 1
-    
+    let provider = MoyaProvider<BirdViewService>()
     
     // PickerView Property
     let typeArray = ["모든 피부 타입", "지성", "건성", "민감성"]
@@ -30,9 +29,8 @@ final class ProductsControllerViewModel {
     
     // MARK:- Initialize
     
-    init(provider: NetworkManager) {
-        self.provider = provider
-        
+    init() {
+    
     }
     
     // MARK:- Data Source
@@ -45,21 +43,45 @@ final class ProductsControllerViewModel {
         return self.fetchedProducts.count
     }
     
-    // MARK:- Methods
+    // MARK:- Network Methods
     
-//    func fetchAllTypeProducts(completion: @escaping () -> ()) {
-//        provider.fetchAllTypeProducts { response in
+    func fetchAllTypeProducts(completion: @escaping () -> ()) {
+        provider.request(.allType) { (result) in
+            switch result {
+            case .success(let response):
+                do {
+                    let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
+                    results.body.forEach { self.fetchedProducts.append($0) }
+                    completion()
+                } catch let err {
+                    print(err)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    func fetchProducts(by skinType: String, page: Int = 1, completion: @escaping () -> ()) {
+        provider.request(.productsByType(type: skinType, page: page)) { (result) in
+            switch result {
+            case .success(let response):
+                do {
+                    let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
+                    results.body.forEach { self.fetchedProducts.append($0) }
+                    completion()
+                } catch let err {
+                    print(err)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+//        fetchProducts(by: skinType, page: page) { (response) in
 //            response.body.forEach { self.fetchedProducts.append($0) }
 //            completion()
 //        }
-//    }
-//
-//    func fetchProducts(by skinType: String, page: Int = 1, completion: @escaping () -> ()) {
-//        provider.fetchProducts(by: skinType, page: page) { (response) in
-//            response.body.forEach { self.fetchedProducts.append($0) }
-//            completion()
-//        }
-//    }
+    }
 //
 //    func fetchMoreProducts(skinType: String, indexPath: IndexPath, completion: @escaping () -> ()) {
 //        if indexPath.row == fetchedProducts.count - 1 {

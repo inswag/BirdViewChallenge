@@ -8,10 +8,10 @@
 
 import Foundation
 
-struct BirdViewResponse<T: Codable>: Codable {
+struct BirdViewResponse<T: Decodable>: Decodable {
   let data: BirdViewResults<T>
 }
 
-struct BirdViewResults<T: Codable>: Codable {
-  let results: [T]
+struct BirdViewResults<T: Decodable>: Decodable {
+  let results: T
 }

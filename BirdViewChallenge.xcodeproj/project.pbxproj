@@ -168,6 +168,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E662DE8423DC4CC40074E740 /* temporary */ = {
+			isa = PBXGroup;
+			children = (
+				F960B48023C8494400F488F8 /* API.swift */,
+				F940CAC023CEEAEE0018927C /* NetworkManager.swift */,
+			);
+			path = temporary;
+			sourceTree = "<group>";
+		};
 		F918071823D43F360059DEEA /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +240,7 @@
 		F95E62C523C2D4A8008F7805 /* BirdViewChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				E662DE8423DC4CC40074E740 /* temporary */,
 				F960B47F23C8491700F488F8 /* NetworkService */,
 				F960B48623C84A9A00F488F8 /* Model */,
 				F95E62F823C30757008F7805 /* Application */,
@@ -328,8 +338,6 @@
 		F960B47F23C8491700F488F8 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				F960B48023C8494400F488F8 /* API.swift */,
-				F940CAC023CEEAEE0018927C /* NetworkManager.swift */,
 				F940CABE23CECA7E0018927C /* BirdViewService.swift */,
 				E699441A23D88C2D00F846CC /* BirdViewResponse.swift */,
 			);

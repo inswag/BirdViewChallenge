@@ -7,19 +7,19 @@
 //
 
 import UIKit
+import Moya
 
 final class ProductControllerViewModel {
     
     // MARK:- Properties
     
-    let provider: NetworkManager
     var fetchedProduct: Product?
     var id: Int
+    let provider = MoyaProvider<BirdViewService>()
     
     // MARK:- Initialize
     
-    init(provider: NetworkManager, id: Int) {
-        self.provider = provider
+    init(id: Int) {
         self.id = id
     }
     
@@ -30,10 +30,10 @@ final class ProductControllerViewModel {
     // MARK:- Methods
     
     func fetchProductSelected(id: Int, completion: @escaping () -> ()) {
-        provider.fetchProductSelected(id: id) { (response) in
-            self.fetchedProduct = response.body
-            completion()
-        }
+//        provider.fetchProductSelected(id: id) { (response) in
+//            self.fetchedProduct = response.body
+//            completion()
+//        }
     }
     
 }

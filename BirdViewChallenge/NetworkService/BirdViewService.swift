@@ -38,8 +38,7 @@ extension BirdViewService: TargetType {
         }
     }
     
-    // 3
-    // Use Moya.Method as sometimes Xcode cannot find the Method namespace.
+    // 3 : Use 'Moya.Method' as sometimes Xcode cannot find the Method namespace.
     public var method: Moya.Method {
         switch self {
         case .allType, .productsByType, .productsBySearch, .productSelected :
@@ -52,11 +51,13 @@ extension BirdViewService: TargetType {
         switch self {
         case .allType:
             return Data()
-//            return "It's time to go".utf8Encoded
-        default:
-            return Data()
+        case .productsByType(let type, let page):
+            return "{'type': '\(type)', 'page': '\(page)'}".utf8Encoded
+            case .productsBySearch(let type, let keyword):
+                return "{'type': '\(type)', 'keyword': '\(keyword)'}".utf8Encoded
+            case .productSelected(let id):
+                return "{'id': '\(id)'}".utf8Encoded
         }
-//        return Data()
     }
     
     // 5 - Parameter 에 대한 처리가 들어간다.
@@ -66,18 +67,17 @@ extension BirdViewService: TargetType {
             return .requestPlain
         case let .productsByType(type, page): // Always sends parameters in URL, regardless of which HTTP method is used
             return .requestParameters(parameters: ["skin_type": type, "page": page], encoding: URLEncoding.queryString)
-        case let .productsBySearch(type, keyword): // Always send parameters as JSON in request body
+        case let .productsBySearch(type, keyword): // .JSON.. : Always send parameters as JSON in request body
             return .requestParameters(parameters: ["keyword": keyword, "skin_type": type], encoding: URLEncoding.queryString)
         case .productSelected: // Send no parameters
             return .requestPlain
         }
     }
     
-    // 6
+    // 6 "token" : "46ea3a2703c54d1bc6ebbc366d0019f1"
     public var headers: [String : String]? {
         return [
-            "Content-Type": "application/json",
-            "token" : "46ea3a2703c54d1bc6ebbc366d0019f1"
+            "Content-Type": "application/json"
         ]
     }
     
@@ -86,6 +86,7 @@ extension BirdViewService: TargetType {
     public var validationType: ValidationType {
         return .successCodes
     }
+    
     
     
 }

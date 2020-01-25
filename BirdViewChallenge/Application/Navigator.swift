@@ -22,13 +22,13 @@ class Navigator {
     func get(segue: Scene) -> UIViewController {
         switch segue {
         case .products:
-            let viewModel = ProductsControllerViewModel(provider: NetworkManager())
+            let viewModel = ProductsControllerViewModel()
             let productsVC = ProductsController(viewModel: viewModel, navigator: self)
             productsVC.modalPresentationStyle = .fullScreen
             let naviProducts = NavigationController(rootViewController: productsVC)
             return naviProducts
         case .product(let id):
-            let viewModel = ProductControllerViewModel(provider: NetworkManager(), id: id)
+            let viewModel = ProductControllerViewModel(id: id)
             let productVC = ProductController(viewModel: viewModel, navigator: self)
             productVC.modalPresentationStyle = .overCurrentContext
             return productVC

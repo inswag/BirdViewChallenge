@@ -18,37 +18,6 @@ class ProductsController: ViewController {
     let viewModel: ProductsControllerViewModel
     var skinType: String = "oily"
     
-//    let provide = NetworkManager
-    let provider = MoyaProvider<BirdViewService>()
-    
-    // MARK: - View State
-    private var state: State = .loading {
-      didSet {
-        switch state {
-        case .ready:
-            print("ready")
-//          viewMessage.isHidden = true
-//          tblComics.isHidden = false
-//          tblComics.reloadData()
-        case .loading:
-             print("loading")
-//          tblComics.isHidden = true
-//          viewMessage.isHidden = false
-//          lblMessage.text = "Getting comics ..."
-//          imgMeessage.image = #imageLiteral(resourceName: "Loading")
-        case .error:
-             print("error")
-//          tblComics.isHidden = true
-//          viewMessage.isHidden = false
-//          lblMessage.text = """
-//                              Something went wrong!
-//                              Try again later.
-//                            """
-//          imgMeessage.image = #imageLiteral(resourceName: "Error")
-        }
-      }
-    }
-    
     // MARK: - UI Properties
     
     lazy var collectionView: UICollectionView = {
@@ -147,42 +116,8 @@ class ProductsController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-        state = .loading
-        
-        provider.request(.allType) { [weak self] result in
-            print("result: \(result)")
-            guard let self = self else { return }
-//
-            switch result {
-            case .success(let response):
-                do {
-                    print("response: \(response)")
-                    print("response.data: \(response.data)")
-                    print("response.mapJSON: \(try response.mapJSON())")
-                    
-                    
-////                    self.state = .ready(response)
-//                    let data = response.data
-//                    print(data)
-//                    let statusCode = response.statusCode
-//                    print(statusCode)
-//                    // GitTEST
-//
-                } catch {
-                    print("here")
-                    self.state = .error
-                }
-            case .failure:
-                print("there")
-                self.state = .error
-            }
-        }
-        
-        
         // Do any additional setup after loading the view.
-//        self.fetchProductsAllType()
+        self.fetchProductsAllType()
     }
     
     override func setupUIComponents() {
@@ -259,9 +194,9 @@ class ProductsController: ViewController {
     // MARK:- Network Method
     
     fileprivate func fetchProductsAllType() {
-//        viewModel.fetchAllTypeProducts { [weak self] in
-//            self?.collectionView.reloadData()
-//        }
+        viewModel.fetchAllTypeProducts { [weak self] in
+            self?.collectionView.reloadData()
+        }
     }
     
     // MARK:- Hide/Show Header Method
@@ -280,7 +215,7 @@ class ProductsController: ViewController {
 extension ProductsController {
   enum State {
     case loading
-    case ready([ProductsRoot])
+    case ready(ProductsRoot)
     case error
   }
 }
@@ -425,46 +360,50 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//
-//        viewModel.fetchedProducts.removeAll()
-//        viewModel.page = 1
-//
-//        switch ProductsControllerViewModel.Types(rawValue: row) {
-//        case .`default`:
-//            viewModel.fetchAllTypeProducts {
-//                self.skinType = ""
-//                self.collectionView.reloadData()
-//                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-//            }
-//        case .oily:
-//            self.skinType = "oily"
-//            viewModel.fetchProducts(by: "oily") {
-//                self.collectionView.reloadData()
-//                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-//            }
-//        case .dry:
-//            self.skinType = "dry"
-//            viewModel.fetchProducts(by: "dry") {
-//
-//                self.collectionView.reloadData()
-//                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-//
-//            }
-//        case .sensitive:
-//            self.skinType = "sensitive"
-//            viewModel.fetchProducts(by: "sensitive") {
-//                self.collectionView.reloadData()
-//                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-//            }
-//        default   :
-//            print("해당 없음")
-//        }
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            self.typeName.text = self.viewModel.typeArray[row]
-//            self.pickerContainer.resignFirstResponder()
-//        }
-//
+
+        viewModel.fetchedProducts.removeAll()
+        viewModel.page = 1
+
+        switch ProductsControllerViewModel.Types(rawValue: row) {
+        case .`default`:
+            viewModel.fetchAllTypeProducts {
+                self.skinType = ""
+                self.collectionView.reloadData()
+                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
+        case .oily:
+            self.skinType = "oily"
+            viewModel.fetchProducts(by: "oily") {
+                self.collectionView.reloadData()
+                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
+        case .dry:
+            self.skinType = "dry"
+            viewModel.fetchProducts(by: "dry") {
+                self.collectionView.isHidden = true
+
+                self.collectionView.reloadData()
+                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self.collectionView.isHidden = false
+
+            }
+        case .sensitive:
+            self.skinType = "sensitive"
+            viewModel.fetchProducts(by: "sensitive") {
+                self.collectionView.isHidden = true
+                self.collectionView.reloadData()
+                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self.collectionView.isHidden = false
+            }
+        default   :
+            print("해당 없음")
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.typeName.text = self.viewModel.typeArray[row]
+            self.pickerContainer.resignFirstResponder()
+        }
+
     }
 
 
