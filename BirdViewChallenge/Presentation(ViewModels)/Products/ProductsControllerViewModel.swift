@@ -77,31 +77,45 @@ final class ProductsControllerViewModel {
                 print(error)
             }
         }
-//        fetchProducts(by: skinType, page: page) { (response) in
-//            response.body.forEach { self.fetchedProducts.append($0) }
-//            completion()
-//        }
     }
-//
-//    func fetchMoreProducts(skinType: String, indexPath: IndexPath, completion: @escaping () -> ()) {
-//        if indexPath.row == fetchedProducts.count - 1 {
-//            self.page += 1
-//            print(self.page)
-//            provider.fetchProducts(by: skinType, page: page) { (response) in
-//                response.body.forEach { self.fetchedProducts.append($0) }
-//                completion()
-//            }
-//        }
-//    }
-//
-//    func fetchProducts(by keyword: String, and skinType: String, completion: @escaping () -> ()) {
-//        provider.fetchProduct(by: keyword, and: skinType) { (response) in
-//            response.body.forEach {
-//                self.fetchedProducts.append($0)
-//                completion()
-//            }
-//        }
-//
-//    }
+
+    func fetchMoreProducts(skinType: String, indexPath: IndexPath, completion: @escaping () -> ()) {
+        if indexPath.row == fetchedProducts.count - 1 {
+            self.page += 1
+            print(self.page)
+            
+            provider.request(.productsByType(type: skinType, page: page)) { (result) in
+                switch result {
+                case .success(let response):
+                    do {
+                        let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
+                        results.body.forEach { self.fetchedProducts.append($0) }
+                        completion()
+                    } catch let err {
+                        print(err)
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+
+    func fetchProducts(by keyword: String, and skinType: String, completion: @escaping () -> ()) {
+        provider.request(.productsBySearch(type: skinType, keyword: keyword)) { (result) in
+            switch result {
+            case .success(let response):
+                do {
+                    let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
+                    results.body.forEach { self.fetchedProducts.append($0) }
+                    completion()
+                } catch let err {
+                    print(err)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
 }

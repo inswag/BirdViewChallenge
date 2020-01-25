@@ -173,6 +173,7 @@
 			children = (
 				F960B48023C8494400F488F8 /* API.swift */,
 				F940CAC023CEEAEE0018927C /* NetworkManager.swift */,
+				E699441A23D88C2D00F846CC /* BirdViewResponse.swift */,
 			);
 			path = temporary;
 			sourceTree = "<group>";
@@ -339,7 +340,6 @@
 			isa = PBXGroup;
 			children = (
 				F940CABE23CECA7E0018927C /* BirdViewService.swift */,
-				E699441A23D88C2D00F846CC /* BirdViewResponse.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";

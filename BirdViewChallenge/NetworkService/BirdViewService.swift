@@ -81,18 +81,16 @@ extension BirdViewService: TargetType {
         ]
     }
     
-    
     // 7
     public var validationType: ValidationType {
         return .successCodes
     }
     
-    
-    
 }
 
 // Just for convenience
 private extension String {
+    
     var urlEscaped: String {
         return addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
@@ -100,4 +98,5 @@ private extension String {
     var utf8Encoded: Data {
         return data(using: .utf8)!
     }
+    
 }

@@ -27,13 +27,23 @@ final class ProductControllerViewModel {
     
     
     
-    // MARK:- Methods
+    // MARK:- Network Methods
     
     func fetchProductSelected(id: Int, completion: @escaping () -> ()) {
-//        provider.fetchProductSelected(id: id) { (response) in
-//            self.fetchedProduct = response.body
-//            completion()
-//        }
+        provider.request(.productSelected(id: id)) { (result) in
+            switch result {
+            case .success(let response):
+                do {
+                    let results = try JSONDecoder().decode(ProductRoot.self, from: response.data)
+                    self.fetchedProduct = results.body
+                    completion()
+                } catch let err {
+                    print(err)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
 }

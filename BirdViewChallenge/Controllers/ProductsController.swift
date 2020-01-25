@@ -22,7 +22,6 @@ class ProductsController: ViewController {
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        
         layout.footerReferenceSize = CGSize(width: view.frame.width, height: 96)
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -250,10 +249,10 @@ extension ProductsController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.fetchedProducts.removeAll()
-        print("This is \(self.skinType)")
-        guard let text = searchBar.text?.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return }
-        print("Here is \(text)")
+//        viewModel.fetchedProducts.removeAll()
+//        print("This is \(self.skinType)")
+//        guard let text = searchBar.text else { return }
+//        print("Here is \(text)")
 //        viewModel.fetchProducts(by: text, and: skinType) {
 //            self.collectionView.reloadData()
 //        }
@@ -292,9 +291,9 @@ extension ProductsController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        viewModel.fetchMoreProducts(skinType: self.skinType, indexPath: indexPath) {
-//            self.collectionView.reloadData()
-//        }
+        viewModel.fetchMoreProducts(skinType: self.skinType, indexPath: indexPath) {
+            self.collectionView.reloadData()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -380,22 +379,16 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
         case .dry:
             self.skinType = "dry"
             viewModel.fetchProducts(by: "dry") {
-                self.collectionView.isHidden = true
-
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self.collectionView.isHidden = false
-
             }
         case .sensitive:
             self.skinType = "sensitive"
             viewModel.fetchProducts(by: "sensitive") {
-                self.collectionView.isHidden = true
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self.collectionView.isHidden = false
             }
-        default   :
+        default:
             print("해당 없음")
         }
 
