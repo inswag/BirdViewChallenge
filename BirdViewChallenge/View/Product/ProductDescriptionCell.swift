@@ -16,6 +16,7 @@ class ProductDescriptionCell: UITableViewCell {
     var viewModel: ProductCellViewModel! {
         didSet {
             productDescriptionTitle.text = viewModel.description
+//            productDescriptionTitle.text?.
         }
     }
     

@@ -9,6 +9,7 @@ target 'BirdViewChallenge' do
  pod 'Alamofire'
  pod 'Kingfisher'
  pod 'Moya', '~> 13.0'
+ pod 'NVActivityIndicatorView'
 
   # Pods for BirdViewChallenge
 

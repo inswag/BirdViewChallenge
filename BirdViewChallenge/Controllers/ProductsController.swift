@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Moya
+import NVActivityIndicatorView
 
 class ProductsController: ViewController {
     
@@ -17,6 +18,7 @@ class ProductsController: ViewController {
     let navigate: Navigator
     let viewModel: ProductsControllerViewModel
     var skinType: String = "oily"
+    var activityIndicatorView: NVActivityIndicatorView!
     
     // MARK: - UI Properties
     
@@ -121,10 +123,19 @@ class ProductsController: ViewController {
     
     override func setupUIComponents() {
         
+        let x: CGFloat = self.view.center.x - 50
+        let y: CGFloat = self.view.center.y - 50
+
+        // NVActivity Indicator
+        activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: x, y: y, width: 100, height: 100),
+                                                        type: .lineSpinFadeLoader,
+                                                        color: .lightGray,
+                                                        padding: 30)
         // Components in VC
         
         self.view.backgroundColor = .white
         [headerView, collectionView].forEach { self.view.addSubview($0) }
+        [activityIndicatorView].forEach { self.view.addSubview($0) }
         
         let window = UIApplication.shared.windows.first { $0.isKeyWindow }
         let height = (self.navigationController?.navigationBar.frame.height ?? 0.0)
@@ -183,7 +194,7 @@ class ProductsController: ViewController {
         textFieldInsideSearchBarLabel.textColor = UIColor.colorWithHexString(hexString: Tools.color.lightBlack, alpha: 0.4)
         self.searchBar.snp.makeConstraints { (m) in
             m.top.equalToSuperview()
-            m.leading.bottom.equalToSuperview().offset(12)
+            m.leading.equalToSuperview().offset(12)
             m.trailing.equalToSuperview().offset(-12)
             m.bottom.equalToSuperview().offset(-8)
         }
@@ -359,7 +370,7 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
+        activityIndicatorView.startAnimating()
         viewModel.fetchedProducts.removeAll()
         viewModel.page = 1
 
@@ -369,24 +380,31 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
                 self.skinType = ""
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self.activityIndicatorView.stopAnimating()
             }
         case .oily:
             self.skinType = "oily"
             viewModel.fetchProducts(by: "oily") {
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self.activityIndicatorView.stopAnimating()
+
             }
         case .dry:
             self.skinType = "dry"
             viewModel.fetchProducts(by: "dry") {
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self.activityIndicatorView.stopAnimating()
+
             }
         case .sensitive:
             self.skinType = "sensitive"
             viewModel.fetchProducts(by: "sensitive") {
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self.activityIndicatorView.stopAnimating()
+
             }
         default:
             print("해당 없음")

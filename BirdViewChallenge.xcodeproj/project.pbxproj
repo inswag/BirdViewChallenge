@@ -178,6 +178,15 @@
 			path = temporary;
 			sourceTree = "<group>";
 		};
+		E662DE8523DD4EE40074E740 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				F918071623D43F310059DEEA /* ProductControllerViewModel.swift */,
+				F918071923D4A2C40059DEEA /* ProductCellViewModel.swift */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
 		F918071823D43F360059DEEA /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,8 +330,7 @@
 			isa = PBXGroup;
 			children = (
 				F918071823D43F360059DEEA /* Products */,
-				F918071623D43F310059DEEA /* ProductControllerViewModel.swift */,
-				F918071923D4A2C40059DEEA /* ProductCellViewModel.swift */,
+				E662DE8523DD4EE40074E740 /* Product */,
 			);
 			path = "Presentation(ViewModels)";
 			sourceTree = "<group>";
