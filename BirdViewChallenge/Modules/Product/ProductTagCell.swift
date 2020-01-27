@@ -56,6 +56,8 @@ class ProductTagCell: UITableViewCell {
     
     // MARK:- Initialize
     
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: String(describing: ProductController.self))
         self.setupUIComponents()
@@ -69,7 +71,7 @@ class ProductTagCell: UITableViewCell {
     
     func setupUIComponents() {
         self.backgroundColor = .white
-//        self.selectionStyle = .none
+        self.selectionStyle = .none
         
         [productNameTitle, priceNameTitle, borderView].forEach { self.contentView.addSubview($0) }
         
@@ -84,7 +86,6 @@ class ProductTagCell: UITableViewCell {
             m.leading.equalToSuperview().offset(24)
             m.trailing.equalToSuperview().offset(-24)
             // Intrinsic Content Size
-//            m.height.equalTo(24)
         }
         
         borderView.snp.makeConstraints { (m) in
@@ -97,12 +98,4 @@ class ProductTagCell: UITableViewCell {
     }
     
     
-    
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
-//
 }

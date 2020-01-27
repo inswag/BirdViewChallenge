@@ -48,9 +48,10 @@ class ProductImageCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK:- Methods
+    
     fileprivate func setupUIComponents() {
-        backgroundColor = .red
-//        selectionStyle = .none
+        selectionStyle = .none
         layer.cornerRadius = 30
         clipsToBounds = true
         layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

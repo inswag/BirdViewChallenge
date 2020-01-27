@@ -15,11 +15,9 @@ class ProductDescriptionCell: UITableViewCell {
     
     var viewModel: ProductCellViewModel! {
         didSet {
-            productDescriptionTitle.text = viewModel.description
-//            productDescriptionTitle.text?.
+            productDescriptionTitle.text = viewModel.description.replacingOccurrences(of: "\\n", with: "\n")
         }
     }
-    
     
     // MARK:- UI Properties
     

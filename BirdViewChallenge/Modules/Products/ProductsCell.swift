@@ -58,10 +58,7 @@ class ProductsCell: CollectionViewCell {
     
     let priceNameTitle: UILabel = {
         let label = UILabel()
-//        label.font = Tools.font.notoSansCJKkrBold(size: 14)
-//        label.text = "price"
         label.numberOfLines = 1
-//        label.textColor = UIColor.colorWithHexString(hexString: Tools.color.darkGray)
         return label
     }()
     
@@ -69,7 +66,6 @@ class ProductsCell: CollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUIComponents()
     }
     
     required init?(coder: NSCoder) {
