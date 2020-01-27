@@ -13,7 +13,7 @@ public enum BirdViewService {
     // Products
     case allType
     case productsByType(type: String, page: Int)
-    case productsBySearch(type: String, keyword: String)
+    case productsBySearch(type: String, search: String)
     
     // Product
     case productSelected(id: Int)
@@ -53,8 +53,8 @@ extension BirdViewService: TargetType {
             return Data()
         case .productsByType(let type, let page):
             return "{'type': '\(type)', 'page': '\(page)'}".utf8Encoded
-            case .productsBySearch(let type, let keyword):
-                return "{'type': '\(type)', 'keyword': '\(keyword)'}".utf8Encoded
+            case .productsBySearch(let type, let search):
+                return "{'type': '\(type)', 'search': '\(search)'}".utf8Encoded
             case .productSelected(let id):
                 return "{'id': '\(id)'}".utf8Encoded
         }
@@ -67,8 +67,8 @@ extension BirdViewService: TargetType {
             return .requestPlain
         case let .productsByType(type, page): // Always sends parameters in URL, regardless of which HTTP method is used
             return .requestParameters(parameters: ["skin_type": type, "page": page], encoding: URLEncoding.queryString)
-        case let .productsBySearch(type, keyword): // .JSON.. : Always send parameters as JSON in request body
-            return .requestParameters(parameters: ["keyword": keyword, "skin_type": type], encoding: URLEncoding.queryString)
+        case let .productsBySearch(type, search): // .JSON.. : Always send parameters as JSON in request body
+            return .requestParameters(parameters: ["search": search, "skin_type": type], encoding: URLEncoding.queryString)
         case .productSelected: // Send no parameters
             return .requestPlain
         }

@@ -210,7 +210,11 @@ class ProductsController: ViewController {
         }
     }
     
+    // MARK:= Touch Event
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.searchBar.resignFirstResponder()
+    }
     
 }
 
@@ -235,22 +239,12 @@ extension ProductsController: UIScrollViewDelegate {
 
 extension ProductsController: UISearchBarDelegate {
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
-    }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        viewModel.fetchedProducts.removeAll()
-//        print("This is \(self.skinType)")
-//        guard let text = searchBar.text else { return }
-//        print("Here is \(text)")
-//        viewModel.fetchProducts(by: text, and: skinType) {
-//            self.collectionView.reloadData()
-//        }
+        viewModel.fetchedProducts.removeAll()
+        guard let text = searchBar.text else { return }
+        viewModel.fetchProducts(by: text, and: skinType) {
+            self.collectionView.reloadData()
+        }
         
         self.searchBar.resignFirstResponder()
     }

@@ -16,6 +16,7 @@ final class ProductsControllerViewModel {
     var fetchedProducts: [Products] = []
     var page: Int = 1
     let provider = MoyaProvider<BirdViewService>()
+    var pagenationPermission: Bool = true
     
     // PickerView Property
     let typeArray = ["모든 피부 타입", "지성", "건성", "민감성"]
@@ -60,9 +61,14 @@ final class ProductsControllerViewModel {
                 print(error)
             }
         }
+        
+        pagenationPermission = false
     }
 
     func fetchProducts(by skinType: String, page: Int = 1, completion: @escaping () -> ()) {
+        
+        pagenationPermission = true
+        
         provider.request(.productsByType(type: skinType, page: page)) { (result) in
             switch result {
             case .success(let response):
@@ -80,6 +86,12 @@ final class ProductsControllerViewModel {
     }
 
     func fetchMoreProducts(skinType: String, indexPath: IndexPath, completion: @escaping () -> ()) {
+        
+        if pagenationPermission == false {
+            print("Pagination Permission is denied")
+            return
+        }
+        
         if indexPath.row == fetchedProducts.count - 1 {
             self.page += 1
             print(self.page)
@@ -101,13 +113,17 @@ final class ProductsControllerViewModel {
         }
     }
 
-    func fetchProducts(by keyword: String, and skinType: String, completion: @escaping () -> ()) {
-        provider.request(.productsBySearch(type: skinType, keyword: keyword)) { (result) in
+    func fetchProducts(by search: String, and skinType: String, completion: @escaping () -> ()) {
+        
+        pagenationPermission = false
+        
+        provider.request(.productsBySearch(type: skinType, search: search)) { (result) in
             switch result {
             case .success(let response):
                 do {
                     let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
                     results.body.forEach { self.fetchedProducts.append($0) }
+                    print("result: \(result)")
                     completion()
                 } catch let err {
                     print(err)
