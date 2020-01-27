@@ -13,7 +13,7 @@ class ProductTagCell: UITableViewCell {
     
     // MARK:- Properties
     
-    var viewModel: ProductCellViewModel! {
+    var viewModel: ProductTagCellViewModel! {
       didSet {
         // Product
         productNameTitle.text = viewModel.title

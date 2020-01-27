@@ -13,7 +13,7 @@ class ProductImageCell: UITableViewCell {
     
     // MARK:- Properties
     
-    var viewModel: ProductCellViewModel! {
+    var viewModel: ProductImageCellViewModel! {
       didSet {
         guard let imageURL = URL(string: viewModel.fullSizeImage) else { return }
         print("\(imageURL)")
@@ -71,3 +71,13 @@ class ProductImageCell: UITableViewCell {
     }
     
 }
+
+// Total
+//let dryScore: Int?
+//let fullSizeImage: String
+//let oilyScore: Int?
+//let sensitiveScore: Int?
+//let description: String
+//let id: Int
+//let price: String
+//let title: String

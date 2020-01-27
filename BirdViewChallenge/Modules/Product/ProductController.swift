@@ -128,15 +128,15 @@ extension ProductController: UITableViewDataSource {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductImageCell.self), for: indexPath) as! ProductImageCell
-            cell.viewModel = ProductCellViewModel(content: rowData)
+            cell.viewModel = ProductImageCellViewModel(content: rowData)
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductTagCell.self), for: indexPath) as! ProductTagCell
-            cell.viewModel = ProductCellViewModel(content: rowData)
+            cell.viewModel = ProductTagCellViewModel(content: rowData)
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductDescriptionCell.self), for: indexPath) as! ProductDescriptionCell
-            cell.viewModel = ProductCellViewModel(content: rowData)
+            cell.viewModel = ProductDescriptionCellViewModel(content: rowData)
             return cell
         default:
             return UITableViewCell()

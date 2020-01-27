@@ -137,15 +137,16 @@ class ProductsController: ViewController {
         [headerView, collectionView].forEach { self.view.addSubview($0) }
         [activityIndicatorView].forEach { self.view.addSubview($0) }
         
-        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
-        let height = (self.navigationController?.navigationBar.frame.height ?? 0.0)
+//        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
+//        let height = (self.navigationController?.navigationBar.frame.height ?? 0.0)
         
         headerView.snp.makeConstraints { (m) in
-            if #available(iOS 13.0, *) {
-                m.top.equalToSuperview().offset(height + (window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 90.0))
-            } else {
-                m.top.equalToSuperview().offset(height + UIApplication.shared.statusBarFrame.height)
-            }
+//            if #available(iOS 13.0, *) {
+//                m.top.equalToSuperview().offset(height + (window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 90.0))
+//            } else {
+//                m.top.equalToSuperview().offset(height + UIApplication.shared.statusBarFrame.height)
+//            }
+            m.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
             m.leading.equalToSuperview()
             m.trailing.equalToSuperview()
             m.height.equalTo(50)
@@ -209,25 +210,25 @@ class ProductsController: ViewController {
         }
     }
     
-    // MARK:- Hide/Show Header Method
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-         
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-    }
     
     
 }
 
-extension ProductsController {
-  enum State {
-    case loading
-    case ready(ProductsRoot)
-    case error
-  }
+// MARK:- Scroll View Delegate
+
+extension ProductsController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentY = scrollView.contentOffset.y
+        if contentY > 50 {
+            headerView.snp.updateConstraints { $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin).offset(50 - contentY) }
+            UIView.animate(withDuration: 0.1) { self.view.layoutIfNeeded() }
+        } else {
+            headerView.snp.updateConstraints { $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin) }
+            UIView.animate(withDuration: 0.1) { self.view.layoutIfNeeded() }
+        }
+    }
+
 }
 
 // MARK:- Search Bar Delegate
@@ -236,24 +237,7 @@ extension ProductsController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-//                if searchText.isEmpty {
-//                    filteredUsers = users
-//                } else {
-//                    filteredUsers = self.users.filter { (user) -> Bool in
-//                        return user.username.lowercased().contains(searchText.lowercased())
-//                    }
-//                }
-//
-//                self.collectionView?.reloadData()
-//
     }
-    
-//    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-//
-//
-//
-////
-//    }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         
@@ -353,7 +337,7 @@ extension ProductsController: UICollectionViewDelegateFlowLayout {
     
 }
 
-// MARK:- UIPickerView
+// MARK:- UIPickerView Methods
 
 extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -388,7 +372,6 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 self.activityIndicatorView.stopAnimating()
-
             }
         case .dry:
             self.skinType = "dry"
@@ -396,7 +379,6 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 self.activityIndicatorView.stopAnimating()
-
             }
         case .sensitive:
             self.skinType = "sensitive"
@@ -404,7 +386,6 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
                 self.collectionView.reloadData()
                 self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 self.activityIndicatorView.stopAnimating()
-
             }
         default:
             print("해당 없음")
@@ -414,7 +395,6 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
             self.typeName.text = self.viewModel.typeArray[row]
             self.pickerContainer.resignFirstResponder()
         }
-
     }
 
 
