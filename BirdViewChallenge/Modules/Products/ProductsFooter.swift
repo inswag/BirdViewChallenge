@@ -10,13 +10,33 @@ import UIKit
 
 class ProductsFooter: UICollectionReusableView {
     
+    let imageView: UIImageView = {
+        let iv = UIImageView()
+        iv.contentMode = .scaleAspectFill
+        iv.backgroundColor = .clear
+        iv.image = UIImage(named: "compass_black")?.withRenderingMode(.alwaysOriginal)
+        return iv
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .red
+        
+        setupUIComponents()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupUIComponents() {
+        addSubview(imageView)
+        
+        imageView.snp.makeConstraints { (m) in
+            m.width.equalTo(24)
+            m.height.equalTo(24)
+            m.centerX.equalToSuperview()
+            m.centerY.equalToSuperview()
+        }
     }
     
 }

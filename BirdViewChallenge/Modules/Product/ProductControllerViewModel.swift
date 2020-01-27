@@ -23,10 +23,6 @@ final class ProductControllerViewModel {
         self.id = id
     }
     
-    // MARK:-
-    
-    
-    
     // MARK:- Network Methods
     
     func fetchProductSelected(id: Int, completion: @escaping () -> ()) {

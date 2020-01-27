@@ -268,7 +268,7 @@ extension ProductsController: UICollectionViewDataSource {
         switch kind {
         case UICollectionView.elementKindSectionFooter:
             let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsFooter.self), for: indexPath) as! ProductsFooter
-            footer.backgroundColor = .blue
+            footer.imageView.layer.add(Tools.rotation.rotationAnimation, forKey: "rotationAnimation")
             return footer
         default:
             return UICollectionReusableView()
@@ -286,6 +286,7 @@ extension ProductsController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
         viewModel.fetchMoreProducts(skinType: self.skinType, indexPath: indexPath) {
             self.collectionView.reloadData()
         }

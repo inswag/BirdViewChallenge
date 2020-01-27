@@ -13,6 +13,7 @@
 		E662DE8C23DE901C0074E740 /* ProductImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E662DE8B23DE901C0074E740 /* ProductImageCellViewModel.swift */; };
 		E662DE8E23DE902B0074E740 /* ProductTagCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E662DE8D23DE902B0074E740 /* ProductTagCellViewModel.swift */; };
 		E662DE9023DE903D0074E740 /* ProductDescriptionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E662DE8F23DE903D0074E740 /* ProductDescriptionCellViewModel.swift */; };
+		E662DE9223DF0D3B0074E740 /* RotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E662DE9123DF0D3B0074E740 /* RotationAnimation.swift */; };
 		E699441B23D88C2D00F846CC /* BirdViewResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E699441A23D88C2D00F846CC /* BirdViewResponse.swift */; };
 		F90574F523D196DA00B5BB0A /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90574F423D196DA00B5BB0A /* ProductController.swift */; };
 		F918070F23D2EE780059DEEA /* ProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918070E23D2EE780059DEEA /* ProductImageCell.swift */; };
@@ -77,6 +78,7 @@
 		E662DE8B23DE901C0074E740 /* ProductImageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCellViewModel.swift; sourceTree = "<group>"; };
 		E662DE8D23DE902B0074E740 /* ProductTagCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTagCellViewModel.swift; sourceTree = "<group>"; };
 		E662DE8F23DE903D0074E740 /* ProductDescriptionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionCellViewModel.swift; sourceTree = "<group>"; };
+		E662DE9123DF0D3B0074E740 /* RotationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationAnimation.swift; sourceTree = "<group>"; };
 		E699441A23D88C2D00F846CC /* BirdViewResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdViewResponse.swift; sourceTree = "<group>"; };
 		F6396DBFC63910A56CDAA107 /* Pods_BirdViewChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BirdViewChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90574F423D196DA00B5BB0A /* ProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
@@ -300,6 +302,7 @@
 				F95E630123C30928008F7805 /* Font.swift */,
 				F95E630523C30999008F7805 /* Anchor.swift */,
 				F928C99C23D5E8FD0049292B /* NumberFormatter.swift */,
+				E662DE9123DF0D3B0074E740 /* RotationAnimation.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				E662DE9023DE903D0074E740 /* ProductDescriptionCellViewModel.swift in Sources */,
 				F960B47423C5ABE000F488F8 /* ProductsCell.swift in Sources */,
 				E699441B23D88C2D00F846CC /* BirdViewResponse.swift in Sources */,
+				E662DE9223DF0D3B0074E740 /* RotationAnimation.swift in Sources */,
 				F928C99D23D5E8FD0049292B /* NumberFormatter.swift in Sources */,
 				F95E631123C3183C008F7805 /* CollectionViewCell.swift in Sources */,
 				F918071123D2F6EA0059DEEA /* ProductTagCell.swift in Sources */,

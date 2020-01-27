@@ -12,5 +12,6 @@ struct Tools {
     
     static let color = Color()
     static let font = Font()
+    static let rotation = RotationAnimation()
     
 }
