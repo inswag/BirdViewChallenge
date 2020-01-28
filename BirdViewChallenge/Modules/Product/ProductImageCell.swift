@@ -16,7 +16,6 @@ class ProductImageCell: UITableViewCell {
     var viewModel: ProductImageCellViewModel! {
       didSet {
         guard let imageURL = URL(string: viewModel.fullSizeImage) else { return }
-        print("\(imageURL)")
         productImage.kf.setImage(with: imageURL)
       }
     }

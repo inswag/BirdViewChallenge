@@ -47,12 +47,12 @@ final class ProductsControllerViewModel {
     // MARK:- Network Methods
     
     func fetchAllTypeProducts(completion: @escaping () -> ()) {
-        provider.request(.allType) { (result) in
+        provider.request(.allType) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
                     let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
-                    results.body.forEach { self.fetchedProducts.append($0) }
+                    results.body.forEach { self?.fetchedProducts.append($0) }
                     completion()
                 } catch let err {
                     print(err)
@@ -69,12 +69,12 @@ final class ProductsControllerViewModel {
         
         pagenationPermission = true
         
-        provider.request(.productsByType(type: skinType, page: page)) { (result) in
+        provider.request(.productsByType(type: skinType, page: page)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
                     let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
-                    results.body.forEach { self.fetchedProducts.append($0) }
+                    results.body.forEach { self?.fetchedProducts.append($0) }
                     completion()
                 } catch let err {
                     print(err)
@@ -96,12 +96,12 @@ final class ProductsControllerViewModel {
             self.page += 1
             print(self.page)
             
-            provider.request(.productsByType(type: skinType, page: page)) { (result) in
+            provider.request(.productsByType(type: skinType, page: page)) { [weak self] result in
                 switch result {
                 case .success(let response):
                     do {
                         let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
-                        results.body.forEach { self.fetchedProducts.append($0) }
+                        results.body.forEach { self?.fetchedProducts.append($0) }
                         completion()
                     } catch let err {
                         print(err)
@@ -117,12 +117,12 @@ final class ProductsControllerViewModel {
         
         pagenationPermission = false
         
-        provider.request(.productsBySearch(type: skinType, search: search)) { (result) in
+        provider.request(.productsBySearch(type: skinType, search: search)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
                     let results = try JSONDecoder().decode(ProductsRoot.self, from: response.data)
-                    results.body.forEach { self.fetchedProducts.append($0) }
+                    results.body.forEach { self?.fetchedProducts.append($0) }
                     print("result: \(result)")
                     completion()
                 } catch let err {

@@ -53,6 +53,16 @@ class ProductController: ViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    lazy var purchaseButton: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = UIColor.colorWithHexString(hexString: "#9013FE")
+        btn.setTitleColor(.white, for: .normal)
+        btn.setTitle("구매하기", for: .normal)
+        btn.titleLabel?.font = Tools.font.notoSansCJKkrBlack(size: 18.0)
+        btn.layer.cornerRadius = 14
+        return btn
+    }()
+    
     // MARK:- Initialize
     
     init(viewModel: ProductControllerViewModel, navigator: Navigator) { // viewModel: ProductsControllerViewModel, navigator: Navigator, provider: NetworkManager
@@ -81,7 +91,7 @@ class ProductController: ViewController {
         self.view.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
         
         // UI Layouts
-        [borderView, tableView, closeButton].forEach { self.view.addSubview($0) }
+        [borderView, tableView, closeButton, purchaseButton].forEach { self.view.addSubview($0) }
         
         borderView.snp.makeConstraints { (m) in
             m.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -102,15 +112,33 @@ class ProductController: ViewController {
             m.height.equalTo(40)
         }
         
+        purchaseButton.snp.makeConstraints { (m) in
+            m.leading.equalToSuperview().offset(24)
+            m.trailing.equalToSuperview().offset(-24)
+            m.bottom.equalToSuperview().offset(30)
+            m.height.equalTo(52)
+            
+        }
+        
     }
     
     // MARK:- Network Method
     
     func fetchProductSelected() {
         let id = viewModel.id
-        viewModel.fetchProductSelected(id: id) {
-            self.tableView.reloadData()
+        viewModel.fetchProductSelected(id: id) { [weak self] in
+            self?.tableView.reloadData()
+            self?.viewAnimation()
         }
+    }
+    
+    func viewAnimation() {
+        self.purchaseButton.snp.updateConstraints { $0.bottom.equalToSuperview().offset(-30) }
+        UIView.animate(withDuration: 1.0,
+                       delay: 0.0,
+                       options: [.curveEaseInOut],
+                       animations: { self.view.layoutIfNeeded() },
+                       completion: nil)
     }
     
 }

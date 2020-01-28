@@ -26,12 +26,12 @@ final class ProductControllerViewModel {
     // MARK:- Network Methods
     
     func fetchProductSelected(id: Int, completion: @escaping () -> ()) {
-        provider.request(.productSelected(id: id)) { (result) in
+        provider.request(.productSelected(id: id)) { [weak self] result in
             switch result {
             case .success(let response):
                 do {
                     let results = try JSONDecoder().decode(ProductRoot.self, from: response.data)
-                    self.fetchedProduct = results.body
+                    self?.fetchedProduct = results.body
                     completion()
                 } catch let err {
                     print(err)

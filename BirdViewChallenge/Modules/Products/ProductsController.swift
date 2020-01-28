@@ -242,8 +242,8 @@ extension ProductsController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         viewModel.fetchedProducts.removeAll()
         guard let text = searchBar.text else { return }
-        viewModel.fetchProducts(by: text, and: skinType) {
-            self.collectionView.reloadData()
+        viewModel.fetchProducts(by: text, and: skinType) { [weak self] in
+            self?.collectionView.reloadData()
         }
         
         self.searchBar.resignFirstResponder()
@@ -281,8 +281,8 @@ extension ProductsController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        viewModel.fetchMoreProducts(skinType: self.skinType, indexPath: indexPath) {
-            self.collectionView.reloadData()
+        viewModel.fetchMoreProducts(skinType: self.skinType, indexPath: indexPath) { [weak self] in
+            self?.collectionView.reloadData()
         }
     }
     
@@ -355,40 +355,40 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
 
         switch ProductsControllerViewModel.Types(rawValue: row) {
         case .`default`:
-            viewModel.fetchAllTypeProducts {
-                self.skinType = ""
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self.activityIndicatorView.stopAnimating()
+            viewModel.fetchAllTypeProducts { [weak self] in
+                self?.skinType = ""
+                self?.collectionView.reloadData()
+                self?.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self?.activityIndicatorView.stopAnimating()
             }
         case .oily:
             self.skinType = "oily"
-            viewModel.fetchProducts(by: "oily") {
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self.activityIndicatorView.stopAnimating()
+            viewModel.fetchProducts(by: "oily") { [weak self] in
+                self?.collectionView.reloadData()
+                self?.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self?.activityIndicatorView.stopAnimating()
             }
         case .dry:
             self.skinType = "dry"
-            viewModel.fetchProducts(by: "dry") {
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self.activityIndicatorView.stopAnimating()
+            viewModel.fetchProducts(by: "dry") { [weak self] in
+                self?.collectionView.reloadData()
+                self?.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self?.activityIndicatorView.stopAnimating()
             }
         case .sensitive:
             self.skinType = "sensitive"
-            viewModel.fetchProducts(by: "sensitive") {
-                self.collectionView.reloadData()
-                self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self.activityIndicatorView.stopAnimating()
+            viewModel.fetchProducts(by: "sensitive") { [weak self] in
+                self?.collectionView.reloadData()
+                self?.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self?.activityIndicatorView.stopAnimating()
             }
         default:
             print("해당 없음")
         }
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.typeName.text = self.viewModel.typeArray[row]
-            self.pickerContainer.resignFirstResponder()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.typeName.text = self?.viewModel.typeArray[row]
+            self?.pickerContainer.resignFirstResponder()
         }
     }
 
