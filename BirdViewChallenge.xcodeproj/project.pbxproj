@@ -13,6 +13,9 @@
 		E662DE8E23DE902B0074E740 /* ProductTagCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E662DE8D23DE902B0074E740 /* ProductTagCellViewModel.swift */; };
 		E662DE9023DE903D0074E740 /* ProductDescriptionCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E662DE8F23DE903D0074E740 /* ProductDescriptionCellViewModel.swift */; };
 		E662DE9223DF0D3B0074E740 /* RotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E662DE9123DF0D3B0074E740 /* RotationAnimation.swift */; };
+		E6D8DF9E240BE45C00398360 /* DefaultProductsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8DF9D240BE45C00398360 /* DefaultProductsRepository.swift */; };
+		E6D8DFA02413715700398360 /* ProductsController+CollectionViewDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8DF9F2413715700398360 /* ProductsController+CollectionViewDecorator.swift */; };
+		E6D8DFA224138A6700398360 /* CollectionViewDecorator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D8DFA124138A6700398360 /* CollectionViewDecorator.swift */; };
 		F90574F523D196DA00B5BB0A /* ProductController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90574F423D196DA00B5BB0A /* ProductController.swift */; };
 		F918070F23D2EE780059DEEA /* ProductImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918070E23D2EE780059DEEA /* ProductImageCell.swift */; };
 		F918071123D2F6EA0059DEEA /* ProductTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F918071023D2F6EA0059DEEA /* ProductTagCell.swift */; };
@@ -76,6 +79,9 @@
 		E662DE8D23DE902B0074E740 /* ProductTagCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTagCellViewModel.swift; sourceTree = "<group>"; };
 		E662DE8F23DE903D0074E740 /* ProductDescriptionCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionCellViewModel.swift; sourceTree = "<group>"; };
 		E662DE9123DF0D3B0074E740 /* RotationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationAnimation.swift; sourceTree = "<group>"; };
+		E6D8DF9D240BE45C00398360 /* DefaultProductsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultProductsRepository.swift; sourceTree = "<group>"; };
+		E6D8DF9F2413715700398360 /* ProductsController+CollectionViewDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProductsController+CollectionViewDecorator.swift"; sourceTree = "<group>"; };
+		E6D8DFA124138A6700398360 /* CollectionViewDecorator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewDecorator.swift; sourceTree = "<group>"; };
 		F6396DBFC63910A56CDAA107 /* Pods_BirdViewChallengeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BirdViewChallengeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90574F423D196DA00B5BB0A /* ProductController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductController.swift; sourceTree = "<group>"; };
 		F918070E23D2EE780059DEEA /* ProductImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCell.swift; sourceTree = "<group>"; };
@@ -182,6 +188,7 @@
 			children = (
 				F95E62CA23C2D4A8008F7805 /* ProductsController.swift */,
 				F960B47023C597BD00F488F8 /* ProductsControllerViewModel.swift */,
+				E6D8DF9F2413715700398360 /* ProductsController+CollectionViewDecorator.swift */,
 				F960B47323C5ABE000F488F8 /* ProductsCell.swift */,
 				F960B47523C5ABF400F488F8 /* ProductsCellViewModel.swift */,
 				F960B47D23C7010900F488F8 /* ProductsFooter.swift */,
@@ -202,6 +209,22 @@
 				E662DE8F23DE903D0074E740 /* ProductDescriptionCellViewModel.swift */,
 			);
 			path = Product;
+			sourceTree = "<group>";
+		};
+		E6D8DF9B240BE40700398360 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E6D8DF9C240BE41300398360 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E6D8DF9C240BE41300398360 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				E6D8DF9D240BE45C00398360 /* DefaultProductsRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		F92C268A23C9F86E00A7E119 /* Resources */ = {
@@ -245,6 +268,7 @@
 				F960B48623C84A9A00F488F8 /* Model */,
 				F95E630723C30A94008F7805 /* Common */,
 				E662DE8823DE8ADD0074E740 /* Modules */,
+				E6D8DF9B240BE40700398360 /* Data */,
 				F960B47F23C8491700F488F8 /* Networking */,
 				F95E62FE23C30915008F7805 /* Tools */,
 				F92C268A23C9F86E00A7E119 /* Resources */,
@@ -300,6 +324,7 @@
 				F95E630823C30AA9008F7805 /* NavigationController.swift */,
 				F95E630A23C317F7008F7805 /* ViewController.swift */,
 				F95E631023C3183C008F7805 /* CollectionViewCell.swift */,
+				E6D8DFA124138A6700398360 /* CollectionViewDecorator.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -563,6 +588,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F95E62F723C30751008F7805 /* Application.swift in Sources */,
+				E6D8DFA224138A6700398360 /* CollectionViewDecorator.swift in Sources */,
 				F960B47E23C7010900F488F8 /* ProductsFooter.swift in Sources */,
 				F95E62FA23C307AA008F7805 /* Navigator.swift in Sources */,
 				F918071723D43F310059DEEA /* ProductControllerViewModel.swift in Sources */,
@@ -586,9 +612,11 @@
 				E662DE8C23DE901C0074E740 /* ProductImageCellViewModel.swift in Sources */,
 				F95E630623C30999008F7805 /* Anchor.swift in Sources */,
 				F95E630423C30961008F7805 /* Tools.swift in Sources */,
+				E6D8DF9E240BE45C00398360 /* DefaultProductsRepository.swift in Sources */,
 				F90574F523D196DA00B5BB0A /* ProductController.swift in Sources */,
 				F960B48823C84F9600F488F8 /* Products.swift in Sources */,
 				F960B47623C5ABF400F488F8 /* ProductsCellViewModel.swift in Sources */,
+				E6D8DFA02413715700398360 /* ProductsController+CollectionViewDecorator.swift in Sources */,
 				F960B48A23C84FA200F488F8 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

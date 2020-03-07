@@ -11,9 +11,11 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
     // MARK:- Initialize
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUIComponents()
+        setupUILayout()
     }
     
     required init?(coder: NSCoder) {
@@ -23,6 +25,10 @@ class CollectionViewCell: UICollectionViewCell {
     // MARK:- UI Methods
 
     func setupUIComponents() {
+        
+    }
+    
+    func setupUILayout() {
         
     }
     

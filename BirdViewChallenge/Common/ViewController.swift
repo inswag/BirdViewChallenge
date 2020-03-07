@@ -27,12 +27,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUIComponents()
+        setupUILayout()
     }
     
     // MARK:- UI Methods
 
     
     func setupUIComponents() {
+        
+    }
+    
+    func setupUILayout() {
         
     }
 

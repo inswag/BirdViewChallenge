@@ -15,7 +15,7 @@ final class ProductControllerViewModel {
     
     var fetchedProduct: Product?
     var id: Int
-    let provider = MoyaProvider<BirdViewService>()
+    let provider = MoyaProvider<BirdViewRouter>()
     
     // MARK:- Initialize
     

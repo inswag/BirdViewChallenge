@@ -8,7 +8,7 @@
 
 import Moya
 
-public enum BirdViewService {
+public enum BirdViewRouter {
     
     // Products
     case allType
@@ -21,7 +21,7 @@ public enum BirdViewService {
 }
 
 // MARK: - TargetType Protocol Implementation
-extension BirdViewService: TargetType {
+extension BirdViewRouter: TargetType {
     
     // 1
     public var baseURL: URL {
@@ -41,7 +41,7 @@ extension BirdViewService: TargetType {
     // 3 : Use 'Moya.Method' as sometimes Xcode cannot find the Method namespace.
     public var method: Moya.Method {
         switch self {
-        case .allType, .productsByType, .productsBySearch, .productSelected :
+        case .allType, .productsByType, .productsBySearch, .productSelected:
             return .get
         }
     }
@@ -53,10 +53,10 @@ extension BirdViewService: TargetType {
             return Data()
         case .productsByType(let type, let page):
             return "{'type': '\(type)', 'page': '\(page)'}".utf8Encoded
-            case .productsBySearch(let type, let search):
-                return "{'type': '\(type)', 'search': '\(search)'}".utf8Encoded
-            case .productSelected(let id):
-                return "{'id': '\(id)'}".utf8Encoded
+        case .productsBySearch(let type, let search):
+            return "{'type': '\(type)', 'search': '\(search)'}".utf8Encoded
+        case .productSelected(let id):
+            return "{'id': '\(id)'}".utf8Encoded
         }
     }
     

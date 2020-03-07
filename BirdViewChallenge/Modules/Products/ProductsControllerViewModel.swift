@@ -15,11 +15,14 @@ final class ProductsControllerViewModel {
     
     var fetchedProducts: [Products] = []
     var page: Int = 1
-    let provider = MoyaProvider<BirdViewService>()
+    let provider = MoyaProvider<BirdViewRouter>()
     var pagenationPermission: Bool = true
     
-    // PickerView Property
+    // MARK:- PickerView Property
+    
     let typeArray = ["모든 피부 타입", "지성", "건성", "민감성"]
+    
+    // MARK:- Cell Type
     
     enum Types: Int {
         case `default`
@@ -133,5 +136,7 @@ final class ProductsControllerViewModel {
             }
         }
     }
+    
+    // MARK:-
     
 }

@@ -121,8 +121,9 @@ class ProductsController: ViewController {
         self.fetchProductsAllType()
     }
     
+    // MARK:- UI Method
+    
     override func setupUIComponents() {
-        
         let x: CGFloat = self.view.center.x - 50
         let y: CGFloat = self.view.center.y - 50
 
@@ -137,44 +138,11 @@ class ProductsController: ViewController {
         [headerView, collectionView].forEach { self.view.addSubview($0) }
         [activityIndicatorView].forEach { self.view.addSubview($0) }
         
-//        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
-//        let height = (self.navigationController?.navigationBar.frame.height ?? 0.0)
-        
-        headerView.snp.makeConstraints { (m) in
-//            if #available(iOS 13.0, *) {
-//                m.top.equalToSuperview().offset(height + (window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 90.0))
-//            } else {
-//                m.top.equalToSuperview().offset(height + UIApplication.shared.statusBarFrame.height)
-//            }
-            m.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
-            m.leading.equalToSuperview()
-            m.trailing.equalToSuperview()
-            m.height.equalTo(50)
-        }
-        
-        collectionView.snp.makeConstraints { (m) in
-            m.top.equalTo(headerView.snp.bottom)
-            m.leading.trailing.bottom.equalToSuperview()
-        }
-        
+
         // Components in Header View
         
         [typeName, pickerContainer].forEach { self.headerView.addSubview($0) }
-
-        pickerContainer.snp.makeConstraints { (m) in
-            m.centerY.equalToSuperview()
-            m.trailing.equalToSuperview().offset(-12)
-            m.width.equalTo(24)
-            m.height.equalTo(24)
-        }
-        
-        typeName.snp.makeConstraints { (m) in
-            m.centerY.equalTo(pickerContainer.snp.centerY)
-            m.trailing.equalTo(pickerContainer.snp.leading).offset(5)
-        }
-        
         [typeButton].forEach { self.pickerContainer.addSubview($0) }
-        typeButton.snp.makeConstraints { $0.edges.equalToSuperview() }
         
         // UISearchBar
         
@@ -202,17 +170,63 @@ class ProductsController: ViewController {
         
     }
     
+    override func setupUILayout() {
+        //        let window = UIApplication.shared.windows.first { $0.isKeyWindow }
+        //        let height = (self.navigationController?.navigationBar.frame.height ?? 0.0)
+        
+        headerView.snp.makeConstraints { (m) in
+            //            if #available(iOS 13.0, *) {
+            //                m.top.equalToSuperview().offset(height + (window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 90.0))
+            //            } else {
+            //                m.top.equalToSuperview().offset(height + UIApplication.shared.statusBarFrame.height)
+            //            }
+            m.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin)
+            m.leading.equalToSuperview()
+            m.trailing.equalToSuperview()
+            m.height.equalTo(50)
+        }
+        
+        collectionView.snp.makeConstraints { (m) in
+            m.top.equalTo(headerView.snp.bottom)
+            m.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        // Components in Header View
+
+        pickerContainer.snp.makeConstraints { (m) in
+            m.centerY.equalToSuperview()
+            m.trailing.equalToSuperview().offset(-12)
+            m.width.equalTo(24)
+            m.height.equalTo(24)
+        }
+        
+        typeName.snp.makeConstraints { (m) in
+            m.centerY.equalTo(pickerContainer.snp.centerY)
+            m.trailing.equalTo(pickerContainer.snp.leading).offset(5)
+        }
+        
+        typeButton.snp.makeConstraints { $0.edges.equalToSuperview() }
+    }
+    
     // MARK:- Network Method
     
     fileprivate func fetchProductsAllType() {
         viewModel.fetchAllTypeProducts { [weak self] in
-            self?.collectionView.reloadData()
+            guard let self = self else { return }
+            self.collectionView.reloadData()
         }
     }
     
-    // MARK:= Touch Event
+    public func openSelectedCell(indexPath: IndexPath) {
+        let id = viewModel.fetchedProducts[indexPath.item].id
+        let productVC = navigate.get(segue: .product(id: id))
+        self.present(productVC, animated: true)
+    }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    // MARK:- Touch Event
+    
+    override func touchesBegan(_ touches: Set<UITouch>,
+                               with event: UIEvent?) {
         self.searchBar.resignFirstResponder()
     }
     
@@ -223,15 +237,17 @@ class ProductsController: ViewController {
 extension ProductsController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let contentY = scrollView.contentOffset.y
-        if contentY > 50 {
-            headerView.snp.updateConstraints { $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin).offset(50 - contentY) }
-            UIView.animate(withDuration: 0.1) { self.view.layoutIfNeeded() }
-        } else {
-            headerView.snp.updateConstraints { $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin) }
-            UIView.animate(withDuration: 0.1) { self.view.layoutIfNeeded() }
+        DispatchQueue.main.async {
+            let contentY = scrollView.contentOffset.y
+                if contentY > 50 {
+                    self.headerView.snp.updateConstraints { $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin).offset(50 - contentY) }
+                    UIView.animate(withDuration: 0.1) { self.view.layoutIfNeeded() }
+                } else {
+                    self.headerView.snp.updateConstraints { $0.top.equalTo(self.view.safeAreaLayoutGuide.snp.topMargin) }
+                    UIView.animate(withDuration: 0.1) { self.view.layoutIfNeeded() }
+                }
+            }
         }
-    }
 
 }
 
@@ -250,87 +266,8 @@ extension ProductsController: UISearchBarDelegate {
     }
 }
 
-// MARK:- Collection View Data Source
 
-extension ProductsController: UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionView.elementKindSectionFooter:
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: ProductsFooter.self), for: indexPath) as! ProductsFooter
-            footer.imageView.layer.add(Tools.rotation.rotationAnimation, forKey: "rotationAnimation")
-            return footer
-        default:
-            return UICollectionReusableView()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfItemsInSection()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ProductsCell.self), for: indexPath) as! ProductsCell
-        cell.viewModel = ProductsCellViewModel(content: viewModel.fetchedProducts[indexPath.row])
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
-        viewModel.fetchMoreProducts(skinType: self.skinType, indexPath: indexPath) { [weak self] in
-            self?.collectionView.reloadData()
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let id = viewModel.fetchedProducts[indexPath.item].id
-        let productVC = navigate.get(segue: .product(id: id))
-        self.present(productVC, animated: true)
-    }
-    
-}
 
-// MARK:- Collection View Delegate
-
-extension ProductsController: UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: self.view.frame.width, height: 50)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Width
-        let width: CGFloat = self.view.frame.width
-        let leftEdge: CGFloat = 12
-        let rightEdge: CGFloat = 12
-        let interspace: CGFloat = 7
-        let totalWidth: CGFloat = (width - leftEdge - rightEdge - interspace) / 2
-        // Height = 236
-        let imageHeight: CGFloat = 172
-        let padding: CGFloat = 4
-        let titleHeight: CGFloat = 40
-        let priceHeight: CGFloat = 20
-        let totalHeight: CGFloat = (imageHeight + padding + titleHeight + priceHeight)
-        return CGSize(width: totalWidth, height: totalHeight)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 12, bottom: 20, right: 12)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 24
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 7
-    }
-    
-}
 
 // MARK:- UIPickerView Methods
 
