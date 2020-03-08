@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProductsFooter: UICollectionReusableView {
+class ProductsFooter: CollectionReusableView {
     
     let imageView: UIImageView = {
         let iv = UIImageView()
@@ -18,19 +18,23 @@ class ProductsFooter: UICollectionReusableView {
         return iv
     }()
     
+    // MARK:- Initialize
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setupUIComponents()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupUIComponents() {
+    // MARK:- Methods
+    
+    override func setupUIComponents() {
         addSubview(imageView)
-        
+    }
+    
+    override func setupUILayout() {
         imageView.snp.makeConstraints { (m) in
             m.width.equalTo(24)
             m.height.equalTo(24)

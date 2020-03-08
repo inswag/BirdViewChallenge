@@ -65,7 +65,7 @@ class ProductController: ViewController {
     
     // MARK:- Initialize
     
-    init(viewModel: ProductControllerViewModel, navigator: Navigator) { // viewModel: ProductsControllerViewModel, navigator: Navigator, provider: NetworkManager
+    init(viewModel: ProductControllerViewModel, navigator: Navigator) {
         self.viewModel = viewModel
         self.navigate = navigator
         super.init()
@@ -91,7 +91,13 @@ class ProductController: ViewController {
         self.view.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
         
         // UI Layouts
-        [borderView, tableView, closeButton, purchaseButton].forEach { self.view.addSubview($0) }
+        [borderView, tableView, closeButton, purchaseButton].forEach {
+            self.view.addSubview($0)
+        }
+        
+    }
+    
+    override func setupUILayout() {
         
         borderView.snp.makeConstraints { (m) in
             m.top.equalTo(view.safeAreaLayoutGuide.snp.top)
@@ -117,75 +123,29 @@ class ProductController: ViewController {
             m.trailing.equalToSuperview().offset(-24)
             m.bottom.equalToSuperview().offset(30)
             m.height.equalTo(52)
-            
         }
         
+    }
+    
+    func setupUIAnimation() {
+        DispatchQueue.main.async {
+            self.purchaseButton.snp.updateConstraints { $0.bottom.equalToSuperview().offset(-30) }
+            UIView.animate(withDuration: 1.0,
+                           delay: 0.0,
+                           options: [.curveEaseInOut],
+                           animations: { self.view.layoutIfNeeded() },
+                           completion: nil)
+        }
     }
     
     // MARK:- Network Method
     
     func fetchProductSelected() {
-        let id = viewModel.id
-        viewModel.fetchProductSelected(id: id) { [weak self] in
-            self?.tableView.reloadData()
-            self?.viewAnimation()
+        viewModel.fetchProductSelected(id: viewModel.id) { [weak self] in
+            guard let self = self else { return }
+            self.tableView.reloadData()
+            self.setupUIAnimation()
         }
     }
     
-    func viewAnimation() {
-        self.purchaseButton.snp.updateConstraints { $0.bottom.equalToSuperview().offset(-30) }
-        UIView.animate(withDuration: 1.0,
-                       delay: 0.0,
-                       options: [.curveEaseInOut],
-                       animations: { self.view.layoutIfNeeded() },
-                       completion: nil)
-    }
-    
-}
-
-extension ProductController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let rowData = viewModel.fetchedProduct else { return UITableViewCell() }
-        
-        switch indexPath.row {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductImageCell.self), for: indexPath) as! ProductImageCell
-            cell.viewModel = ProductImageCellViewModel(content: rowData)
-            return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductTagCell.self), for: indexPath) as! ProductTagCell
-            cell.viewModel = ProductTagCellViewModel(content: rowData)
-            return cell
-        case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductDescriptionCell.self), for: indexPath) as! ProductDescriptionCell
-            cell.viewModel = ProductDescriptionCellViewModel(content: rowData)
-            return cell
-        default:
-            return UITableViewCell()
-        }
-        
-    }
-    
-    
-}
-
-extension ProductController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0:
-            let height: CGFloat = self.view.frame.width
-            return height
-        case 1, 2:
-            return UITableView.automaticDimension
-        default:
-            return 200
-        }
-    }
 }

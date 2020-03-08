@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class ProductImageCell: UITableViewCell {
+class ProductImageCell: TableViewCell {
     
     // MARK:- Properties
     
@@ -40,7 +40,6 @@ class ProductImageCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: String(describing: ProductController.self))
-        self.setupUIComponents()
     }
     
     required init?(coder: NSCoder) {
@@ -49,14 +48,20 @@ class ProductImageCell: UITableViewCell {
     
     // MARK:- Methods
     
-    fileprivate func setupUIComponents() {
+    internal override func setupUIComponents() {
         selectionStyle = .none
         layer.cornerRadius = 30
         clipsToBounds = true
-        layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        layer.maskedCorners = [.layerMinXMinYCorner,
+                               .layerMaxXMinYCorner]
         
-        [productImage, borderView].forEach { self.addSubview($0) }
-        
+        [productImage, borderView].forEach {
+            self.addSubview($0)
+            
+        }
+    }
+    
+    internal override func setupUILayout() {
         borderView.snp.makeConstraints { (m) in
             m.leading.trailing.bottom.equalToSuperview()
             m.height.equalTo(1)

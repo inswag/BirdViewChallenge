@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class ProductDescriptionCell: UITableViewCell {
+class ProductDescriptionCell: TableViewCell {
     
     // MARK:- Properties
     
@@ -55,8 +55,6 @@ class ProductDescriptionCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: String(describing: ProductController.self))
-        
-        self.setupUIComponents()
     }
     
     required init?(coder: NSCoder) {
@@ -66,14 +64,16 @@ class ProductDescriptionCell: UITableViewCell {
     
     // MARK:- Method
     
-    func setupUIComponents() {
+    override func setupUIComponents() {
         self.backgroundColor = .white
         self.selectionStyle = .none
         
         [productDescriptionTitle, legalDescriptionView].forEach {
             self.contentView.addSubview($0)
         }
-        
+    }
+    
+    override func setupUILayout() {
         productDescriptionTitle.snp.makeConstraints { (m) in
             m.top.leading.equalToSuperview().offset(24)
             m.trailing.equalToSuperview().offset(-24)
@@ -86,8 +86,6 @@ class ProductDescriptionCell: UITableViewCell {
             m.bottom.equalToSuperview().offset(-122)
         }
     }
-    
-
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -14,6 +14,8 @@ class ProductDescriptionCellViewModel {
 
     let description: String
     
+    // MARK:- Initialize
+    
     init(content: Product) {
         self.description = content.description
     }

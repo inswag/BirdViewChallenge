@@ -15,6 +15,8 @@ class ProductTagCellViewModel {
     let price: String
     let title: String
     
+    // MARK:- Initialize
+    
     init(content: Product) {
         self.price = content.price
         self.title = content.title

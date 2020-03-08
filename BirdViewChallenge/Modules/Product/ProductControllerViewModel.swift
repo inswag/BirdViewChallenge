@@ -11,6 +11,15 @@ import Moya
 
 final class ProductControllerViewModel {
     
+    // MARK:- Cell Type
+    
+    enum CellType: Int {
+        case image
+        case tag
+        case description
+        case totalCount
+    }
+    
     // MARK:- Properties
     
     var fetchedProduct: Product?
@@ -41,5 +50,13 @@ final class ProductControllerViewModel {
             }
         }
     }
+    
+    // MARK:- Table View Methods
+    
+    func numberOfRowsInSection() -> Int {
+        return ProductControllerViewModel.CellType.totalCount.rawValue
+    }
+    
+    
     
 }

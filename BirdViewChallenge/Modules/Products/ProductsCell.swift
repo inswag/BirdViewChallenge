@@ -76,7 +76,9 @@ class ProductsCell: CollectionViewCell {
     
     override func setupUIComponents() {
         [photoImageView, productNameTitle, priceNameTitle].forEach { self.contentView.addSubview($0) }
-        
+    }
+    
+    override func setupUILayout() {
         photoImageView.snp.makeConstraints { (m) in
             m.top.equalTo(self.contentView.safeAreaLayoutGuide.snp.top)
             m.leading.equalTo(self.contentView.safeAreaLayoutGuide.snp.leading)
@@ -96,6 +98,5 @@ class ProductsCell: CollectionViewCell {
             m.trailing.equalTo(self.contentView.safeAreaLayoutGuide.snp.trailing).offset(-8)
         }
     }
-    
     
 }

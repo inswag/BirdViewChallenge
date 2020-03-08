@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class ProductTagCell: UITableViewCell {
+class ProductTagCell: TableViewCell {
     
     // MARK:- Properties
     
@@ -56,11 +56,8 @@ class ProductTagCell: UITableViewCell {
     
     // MARK:- Initialize
     
-    
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: String(describing: ProductController.self))
-        self.setupUIComponents()
     }
     
     required init?(coder: NSCoder) {
@@ -69,12 +66,16 @@ class ProductTagCell: UITableViewCell {
     
     // MARK:- Methods
     
-    func setupUIComponents() {
+    internal override func setupUIComponents() {
         self.backgroundColor = .white
         self.selectionStyle = .none
         
-        [productNameTitle, priceNameTitle, borderView].forEach { self.contentView.addSubview($0) }
-        
+        [productNameTitle, priceNameTitle, borderView].forEach {
+            self.contentView.addSubview($0)
+        }
+    }
+    
+    internal override func setupUILayout() {
         productNameTitle.snp.makeConstraints { (m) in
             m.top.equalToSuperview().offset(34)
             m.leading.equalToSuperview().offset(24)
@@ -96,6 +97,5 @@ class ProductTagCell: UITableViewCell {
             m.height.equalTo(2)
         }
     }
-    
     
 }

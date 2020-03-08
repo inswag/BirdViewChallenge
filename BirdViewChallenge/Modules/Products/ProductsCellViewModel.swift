@@ -20,6 +20,8 @@ class ProductsCellViewModel {
     let thumbnail: String
     let title: String
     
+    // MARK:- Initialize
+    
     init(content: Products) {
         self.id = content.id
         self.price = content.price
