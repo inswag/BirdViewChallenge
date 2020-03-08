@@ -39,29 +39,36 @@ extension ProductController: UITableViewDelegate {
     }
 }
 
+// MARK:- Table View Decorator
+
 extension ProductController: TableViewDecorator {
     
     func configureCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        
         guard let rowData = viewModel.fetchedProduct else { return UITableViewCell() }
         
-        switch indexPath.row {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductImageCell.self), for: indexPath) as! ProductImageCell
+        switch ProductControllerViewModel.CellType(rawValue: indexPath.row){
+        case .image:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductImageCell.self),
+                                                           for: indexPath) as? ProductImageCell else {
+                                                            return UITableViewCell() }
             cell.viewModel = ProductImageCellViewModel(content: rowData)
             return cell
-        case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductTagCell.self), for: indexPath) as! ProductTagCell
+        case .tag:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductTagCell.self),
+                                                           for: indexPath) as? ProductTagCell else {
+                                                            return UITableViewCell() }
+            
             cell.viewModel = ProductTagCellViewModel(content: rowData)
             return cell
-        case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductDescriptionCell.self), for: indexPath) as! ProductDescriptionCell
+        case .description:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ProductDescriptionCell.self),
+                                                           for: indexPath) as? ProductDescriptionCell else {
+                                                            return UITableViewCell() }
             cell.viewModel = ProductDescriptionCellViewModel(content: rowData)
             return cell
         default:
             return UITableViewCell()
         }
     }
-    
     
 }

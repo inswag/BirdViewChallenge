@@ -291,41 +291,28 @@ extension ProductsController: UIPickerViewDelegate, UIPickerViewDataSource {
         viewModel.page = 1
 
         switch ProductsControllerViewModel.Types(rawValue: row) {
-        case .`default`:
-            viewModel.fetchAllTypeProducts { [weak self] in
-                self?.skinType = ""
-                self?.collectionView.reloadData()
-                self?.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self?.activityIndicatorView.stopAnimating()
-            }
-        case .oily:
+        case .`default`, .oily:
             self.skinType = "oily"
-            viewModel.fetchProducts(by: "oily") { [weak self] in
-                self?.collectionView.reloadData()
-                self?.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self?.activityIndicatorView.stopAnimating()
-            }
         case .dry:
             self.skinType = "dry"
-            viewModel.fetchProducts(by: "dry") { [weak self] in
-                self?.collectionView.reloadData()
-                self?.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self?.activityIndicatorView.stopAnimating()
-            }
         case .sensitive:
             self.skinType = "sensitive"
-            viewModel.fetchProducts(by: "sensitive") { [weak self] in
-                self?.collectionView.reloadData()
-                self?.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self?.activityIndicatorView.stopAnimating()
-            }
         default:
-            print("해당 없음")
+            self.skinType = ""
         }
-
+        
+        viewModel.fetchProducts(by: self.skinType) { [weak self] in
+            guard let self = self else { return }
+            self.collectionView.reloadData()
+            self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            self.activityIndicatorView.stopAnimating()
+        }
+        
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            self?.typeName.text = self?.viewModel.typeArray[row]
-            self?.pickerContainer.resignFirstResponder()
+            guard let self = self else { return }
+            self.typeName.text = self.viewModel.typeArray[row]
+            self.pickerContainer.resignFirstResponder()
         }
     }
 
